@@ -7,7 +7,7 @@ NAME = PhoneBook
 # COMPILATION AND FLAGS
 # ----------------------------------
 CXX     = c++
-CXXFLAGS= -Wall -Wextra -Werror -std=c++98 -I -g \
+CXXFLAGS= -Wall -Wextra -Werror -std=c++98 -g -I ./
 
 # ----------------------------------
 # PATH
