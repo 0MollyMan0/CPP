@@ -6,56 +6,64 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 10:18:48 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/04 10:39:34 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/04 14:11:56 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+#include "utils.hpp"
 #include <iostream>
 
-PhoneBook::PhoneBook() {}
-
-void PhoneBook::setContactFirstName(const std::string value, int index)
+PhoneBook::PhoneBook() 
 {
-	contacts[index].setFirstName(value);
-}
-std::string PhoneBook::getContactFirstName(int index) const
-{
-    return contacts[index].getFirstName();
+	newIndex = 0;
 }
 
-void PhoneBook::setContactLastName(const std::string value, int index)
+bool PhoneBook::addContact()
 {
-	contacts[index].setLastName(value);
-}
-std::string PhoneBook::getContactLastName(int index) const
-{
-    return contacts[index].getLastName();
+	std::string input;
+	
+	if (newIndex == 9)
+		newIndex = 0;
+	std::cout << "First name: ";
+	std::getline(std::cin, input);
+	if (!isValidField(input))
+		return (false);
+	contacts[newIndex].setFirstName(input);
+
+	std::cout << "Last name: ";
+	std::getline(std::cin, input);
+	if (!isValidField(input))
+		return (false);
+	contacts[newIndex].setLastName(input);
+
+	std::cout << "Nickname: ";
+	std::getline(std::cin, input);
+	if (!isValidField(input))
+		return (false);
+	contacts[newIndex].setNickname(input);
+
+	std::cout << "Phone number: ";
+	std::getline(std::cin, input);
+	if (!isValidField(input))
+		return (false);
+	contacts[newIndex].setPhoneNumber(input);
+
+	std::cout << "Darkest secret: ";
+	std::getline(std::cin, input);
+	if (!isValidField(input))
+		return (false);
+	contacts[newIndex].setDarkestSecret(input);
+
+	newIndex++;
+	return (true);
 }
 
-void PhoneBook::setContactNickname(const std::string value, int index)
+void PhoneBook::printContact(int index)
 {
-	contacts[index].setNickname(value);
-}
-std::string PhoneBook::getContactNickname(int index) const
-{
-    return contacts[index].getNickname();
-}
-
-void PhoneBook::setContactPhoneNumber(const std::string value, int index)
-{
-	contacts[index].setPhoneNumber(value);
-}
-std::string PhoneBook::getContactPhoneNumber(int index) const
-{
-    return contacts[index].getPhoneNumber();
-}
-
-void PhoneBook::setContactDarkestSecret(const std::string value, int index)
-{
-	contacts[index].setDarkestSecret(value);
-}
-std::string PhoneBook::getContactDarkestSecret(int index) const
-{
-    return contacts[index].getDarkestSecret();
+	std::cout << contacts[index].getFirstName() << "\n";
+	std::cout << contacts[index].getLastName() << "\n";
+	std::cout << contacts[index].getNickname() << "\n";
+	std::cout << contacts[index].getPhoneNumber() << "\n";
+	std::cout << contacts[index].getDarkestSecret() << "\n";
 }

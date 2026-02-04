@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 18:26:10 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/04 10:02:39 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/04 14:07:49 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 # define UTILS_HPP
 
 int	command(void);
+bool isValidField(const std::string& str);
 
 #endif
