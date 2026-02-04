@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 10:18:48 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/04 14:11:56 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/04 14:30:39 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,34 +25,54 @@ bool PhoneBook::addContact()
 	
 	if (newIndex == 9)
 		newIndex = 0;
-	std::cout << "First name: ";
-	std::getline(std::cin, input);
-	if (!isValidField(input))
-		return (false);
+	do
+	{
+		std::cout << "First name: ";
+		std::getline(std::cin, input);
+		if (isValidField(input))
+			break;
+		std::cout << "No empty fields are allowed\n";
+	} while (!isValidField(input));
 	contacts[newIndex].setFirstName(input);
 
-	std::cout << "Last name: ";
-	std::getline(std::cin, input);
-	if (!isValidField(input))
-		return (false);
+	do
+	{
+		std::cout << "Last name: ";
+		std::getline(std::cin, input);
+		if (isValidField(input))
+			break;
+		std::cout << "No empty fields are allowed\n";
+	} while (!isValidField(input));
 	contacts[newIndex].setLastName(input);
 
-	std::cout << "Nickname: ";
-	std::getline(std::cin, input);
-	if (!isValidField(input))
-		return (false);
+	do
+	{
+		std::cout << "Nickname: ";
+		std::getline(std::cin, input);
+		if (isValidField(input))
+			break;
+		std::cout << "No empty fields are allowed\n";
+	} while (!isValidField(input));
 	contacts[newIndex].setNickname(input);
 
-	std::cout << "Phone number: ";
-	std::getline(std::cin, input);
-	if (!isValidField(input))
-		return (false);
+	do
+	{
+		std::cout << "Phone number: ";
+		std::getline(std::cin, input);
+		if (isValidField(input))
+			break;
+		std::cout << "No empty fields are allowed\n";
+	} while (!isValidField(input));
 	contacts[newIndex].setPhoneNumber(input);
 
-	std::cout << "Darkest secret: ";
-	std::getline(std::cin, input);
-	if (!isValidField(input))
-		return (false);
+	do
+	{
+		std::cout << "Darkest secret: ";
+		std::getline(std::cin, input);
+		if (isValidField(input))
+			break;
+		std::cout << "No empty fields are allowed\n";
+	} while (!isValidField(input));
 	contacts[newIndex].setDarkestSecret(input);
 
 	newIndex++;

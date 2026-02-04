@@ -33,6 +33,8 @@ WHITE       = \033[0;37m
 # ----------------------------------
 SRCS    = main.cpp \
 		utils.cpp \
+		Contact.cpp \
+		PhoneBook.cpp \
 
 OBJS    = $(SRCS:.cpp=.o)
 
@@ -71,7 +73,7 @@ clean:
 		if [ -f $$file ]; then \
 			echo "  $(YELLOW)→ removing$(RESET) $$file"; \
 			rm -f $$file; \
-			sleep 0.1; \
+			sleep 0.05; \
 		fi \
 	done
 
@@ -79,7 +81,7 @@ clean:
 fclean: clean
 	@echo "$(RED)[FCLEAN]$(RESET) Removing executable..."
 	@echo "  $(YELLOW)→ removing$(RESET) $(NAME)";
-	@sleep 0.1
+	@sleep 0.08
 	@rm -f $(NAME)
 
 # Rebuild
