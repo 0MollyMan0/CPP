@@ -32,7 +32,7 @@ WHITE       = \033[0;37m
 # SOURCES
 # ----------------------------------
 SRCS    = main.cpp \
-		command.cpp \
+		utils.cpp \
 
 OBJS    = $(SRCS:.cpp=.o)
 
