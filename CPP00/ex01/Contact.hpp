@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 09:49:59 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/04 10:03:38 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/04 10:35:31 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ private:
     std::string darkestSecret;
 
 public:
+	Contact();
     void setFirstName(std::string value);
     std::string getFirstName() const;
 	void setLastName(std::string value);
