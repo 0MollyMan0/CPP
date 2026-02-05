@@ -42,16 +42,14 @@ OBJS    = $(SRCS:.cpp=.o)
 
 all: $(NAME) banner
 banner :
-	@echo "  ░██████  ░█████████  ░█████████       $(BLUE)░████$(RESET)  "
-	@echo " ░██   ░██ ░██     ░██ ░██     ░██     $(BLUE)░██ ░██$(RESET)  "
-	@echo "░██        ░██     ░██ ░██     ░██    $(BLUE)░██ ░████$(RESET) "
-	@echo "░██        ░█████████  ░█████████     $(BLUE)░██░██░██$(RESET) "
-	@echo "░██        ░██         ░██            $(BLUE)░████ ░██$(RESET) "
-	@echo "░██   ░██  ░██         ░██             $(BLUE)░██ ░██$(RESET)  "
-	@echo "  ░██████  ░██         ░██              $(BLUE)░████$(RESET)   "
-                                                
-                                                
-                                                                                   
+	@echo "  ░██████  ░█████████  ░█████████       $(BLUE)░████     ░████$(RESET)"
+	@echo " ░██   ░██ ░██     ░██ ░██     ░██     $(BLUE)░██ ░██   ░██ ░██$(RESET)"
+	@echo "░██        ░██     ░██ ░██     ░██    $(BLUE)░██ ░████ ░██ ░████$(RESET)"
+	@echo "░██        ░█████████  ░█████████     $(BLUE)░██░██░██ ░██░██░██$(RESET)"
+	@echo "░██        ░██         ░██            $(BLUE)░████ ░██ ░████ ░██$(RESET)"
+	@echo " ░██   ░██ ░██         ░██             $(BLUE)░██ ░██   ░██ ░██$(RESET)"
+	@echo "  ░██████  ░██         ░██              $(BLUE)░████     ░████$(RESET)"
+
 # Final link
 $(NAME): $(OBJS)
 	@echo "\033[1;34m[LINK] -> Creating $(NAME)...\033[0m"
