@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 18:11:40 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/04 14:39:16 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/05 08:18:45 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,18 @@ bool isValidField(const std::string& str)
 {
 	if (str.empty() || isOnlySpace(str))
 		return false;
+    return true;
+}
+
+bool isNumber(const std::string& str)
+{
+    if (str.empty())
+        return false;
+
+    for (size_t i = 0; i < str.length(); i++)
+    {
+        if (!std::isdigit(str[i]))
+            return false;
+    }
     return true;
 }

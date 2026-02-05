@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 10:18:48 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/04 15:48:18 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/05 08:29:16 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void PhoneBook::printAllContact()
 	std::string value;
 	
 	std::cout << "Index     |First Name|Last name |Nickname  ";
-	while (!contacts[index].getFirstName().empty())
+	for (size_t i = 0; i < numberContacts; i++)
 	{
 		std::cout << index << "         |";
 		for (size_t j = 0; j < 3; j++)
@@ -64,6 +64,28 @@ void PhoneBook::printAllContact()
 	}
 }
 
+int	PhoneBook::indexEntry(void)
+{
+	std::string input;
+	int	index;
+	
+	while (true)
+	{
+		std::cout << "A valid index is an index between 0 and " << numberContacts;
+		std::cout << "Enter the index of the contact you wanna see: ";
+		std::getline(std::cin, input);
+
+		if (!isNumber(input))
+			continue;
+
+		index = std::stoi(input);
+
+		if (index >= 0 && index < numberContacts)
+			break;
+	}
+	return (index);
+}
+
 bool PhoneBook::addContact()
 {
 	std::string input;
@@ -86,6 +108,8 @@ bool PhoneBook::addContact()
 		std::getline(std::cin, input);
 		if (isValidField(input))
 			break;
+		std::cout << "A valid index is an index between " << ;
+		std::cout << "Enter the index of the contact you wanna see: ";
 		std::cout << "No empty fields are allowed\n";
 	} while (!isValidField(input));
 	contacts[newIndex].setLastName(input);
@@ -128,16 +152,8 @@ bool PhoneBook::addContact()
 
 void PhoneBook::searchContact()
 {
-	std::string input;
+	int	index;
 	
 	printAllContact();
-	std::cout << "Enter the index of the contact you wanna see: ";
-	std::getline(std::cin, input);
-	while (!s || input < "0" || input > numberContacts)
-	{
-		std::cout << "A valid index is an index between " << ;
-		std::cout << "Enter the index of the contact you wanna see: ";
-		std::getline(std::cin, input);
-	}
-	
+	index = indexEntry();
 }
