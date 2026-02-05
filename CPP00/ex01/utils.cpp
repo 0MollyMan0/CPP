@@ -6,14 +6,15 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 18:11:40 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/05 08:18:45 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/05 08:51:55 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <utils.hpp>
 #include <PhoneBook.hpp>
+#include <sstream>
 
-static bool isOnlySpace(const std::string& str)
+static bool	isOnlySpace(const std::string& str)
 {
 	for (size_t i = 0; i < str.length(); i++)
 	{
@@ -23,22 +24,33 @@ static bool isOnlySpace(const std::string& str)
 	return true;
 }
 
-bool isValidField(const std::string& str)
+bool	isValidField(const std::string& str)
 {
 	if (str.empty() || isOnlySpace(str))
 		return false;
     return true;
 }
 
-bool isNumber(const std::string& str)
+bool	isNumber(const std::string& str)
 {
-    if (str.empty())
-        return false;
+	if (str.empty())
+		return false;
 
-    for (size_t i = 0; i < str.length(); i++)
-    {
-        if (!std::isdigit(str[i]))
-            return false;
-    }
-    return true;
+	for (size_t i = 0; i < str.length(); i++)
+	{
+		if (!std::isdigit(str[i]))
+			return false;
+	}
+	return true;
+}
+
+int	stringToInt(std::string str)
+{
+	int					res;
+	std::stringstream	ss;
+
+	ss << str;
+	ss >> res;
+
+	return (res);
 }

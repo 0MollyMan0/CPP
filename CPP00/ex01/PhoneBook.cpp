@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 10:18:48 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/05 08:29:16 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/05 09:26:24 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,45 +22,44 @@ PhoneBook::PhoneBook()
 
 void PhoneBook::printContact(int index)
 {
-	std::cout << contacts[index].getFirstName() << "\n";
-	std::cout << contacts[index].getLastName() << "\n";
-	std::cout << contacts[index].getNickname() << "\n";
-	std::cout << contacts[index].getPhoneNumber() << "\n";
-	std::cout << contacts[index].getDarkestSecret() << "\n";
+	std::cout << "First name: " << contacts[index].getFirstName() << "\n";
+	std::cout << "Last name: " << contacts[index].getLastName() << "\n";
+	std::cout << "Nickname: " << contacts[index].getNickname() << "\n";
+	std::cout << "Phone number: " << contacts[index].getPhoneNumber() << "\n";
+	std::cout << "Darkest secret: " << contacts[index].getDarkestSecret() << "\n";
 }
 
 void PhoneBook::printAllContact()
 {
-	int index = 0;
 	std::string value;
 	
-	std::cout << "Index     |First Name|Last name |Nickname  ";
-	for (size_t i = 0; i < numberContacts; i++)
+	std::cout << "Index     |First Name|Last name |Nickname  |\n";
+	for (int contactIndex = 0; contactIndex < numberContacts; contactIndex++)
 	{
-		std::cout << index << "         |";
-		for (size_t j = 0; j < 3; j++)
+		std::cout << contactIndex << "         |";
+		for (int j = 0; j < 3; j++)
 		{
 			if (j == 0)
-				value = contacts[index].getFirstName();
+				value = contacts[contactIndex].getFirstName();
 			else if (j == 1)
-				value = contacts[index].getLastName();
+				value = contacts[contactIndex].getLastName();
 			else if (j == 2)
-				value = contacts[index].getNickname();
-			for (size_t i = 0; i < 10; i++)
+				value = contacts[contactIndex].getNickname();
+			for (size_t charIndex = 0; charIndex < 10; charIndex++)
 			{
-				if (value[i])
+				if (charIndex < value.length())
 				{
-					if (value[10] && i == 9)
+					if (value.length() > 10 && charIndex == 9)
 						std::cout << ".";
 					else
-						std::cout << value[i];
+						std::cout << value[charIndex];
 				}
 				else
 					std::cout << " ";
 			}
 			std::cout << "|";
 		}
-		index++;	
+		std::cout << "\n";
 	}
 }
 
@@ -71,17 +70,20 @@ int	PhoneBook::indexEntry(void)
 	
 	while (true)
 	{
-		std::cout << "A valid index is an index between 0 and " << numberContacts;
-		std::cout << "Enter the index of the contact you wanna see: ";
+		std::cout << "\nEnter the index of the contact you wanna see: ";
 		std::getline(std::cin, input);
 
 		if (!isNumber(input))
+		{
+			std::cout << "Invalid index\n";
 			continue;
-
-		index = std::stoi(input);
+		}
+		
+		index = stringToInt(input);
 
 		if (index >= 0 && index < numberContacts)
 			break;
+		std::cout << "Behond limit index\n";
 	}
 	return (index);
 }
@@ -90,7 +92,7 @@ bool PhoneBook::addContact()
 {
 	std::string input;
 	
-	if (newIndex == 9)
+	if (newIndex == 8)
 		newIndex = 0;
 	do
 	{
@@ -108,8 +110,6 @@ bool PhoneBook::addContact()
 		std::getline(std::cin, input);
 		if (isValidField(input))
 			break;
-		std::cout << "A valid index is an index between " << ;
-		std::cout << "Enter the index of the contact you wanna see: ";
 		std::cout << "No empty fields are allowed\n";
 	} while (!isValidField(input));
 	contacts[newIndex].setLastName(input);
@@ -156,4 +156,5 @@ void PhoneBook::searchContact()
 	
 	printAllContact();
 	index = indexEntry();
+	printContact(index);
 }

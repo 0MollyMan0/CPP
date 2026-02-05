@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 17:57:57 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/04 14:20:41 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/05 08:54:51 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(void)
 		if (input == "ADD")
 			phoneBook.addContact();
 		else if (input == "SEARCH")
-			std::cout << "try to search a contact\n";
+			phoneBook.searchContact();
 		else if (input == "EXIT")
 			running = 0;
 	}	

@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 09:47:30 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/04 11:30:29 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/05 08:53:14 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void Contact::setFirstName(const std::string value)
 }
 std::string Contact::getFirstName() const
 {
-    return firstName;
+	return firstName;
 }
 
 void Contact::setLastName(const std::string value)
@@ -30,7 +30,7 @@ void Contact::setLastName(const std::string value)
 }
 std::string Contact::getLastName() const
 {
-    return lastName;
+	return lastName;
 }
 
 void Contact::setNickname(const std::string value)
@@ -39,7 +39,7 @@ void Contact::setNickname(const std::string value)
 }
 std::string Contact::getNickname() const
 {
-    return nickname;
+	return nickname;
 }
 
 void Contact::setPhoneNumber(const std::string value)
@@ -48,7 +48,7 @@ void Contact::setPhoneNumber(const std::string value)
 }
 std::string Contact::getPhoneNumber() const
 {
-    return phoneNumber;
+	return phoneNumber;
 }
 
 void Contact::setDarkestSecret(const std::string value)
@@ -57,5 +57,5 @@ void Contact::setDarkestSecret(const std::string value)
 }
 std::string Contact::getDarkestSecret() const
 {
-    return darkestSecret;
+	return darkestSecret;
 }
