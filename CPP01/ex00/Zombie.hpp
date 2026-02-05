@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:25:54 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/05 13:35:32 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/05 13:50:41 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ class Zombie
 private:
 	std::string name;
 public:
-	Zombie(std::string name);
+	Zombie();
 	~Zombie();
+	std::string get_name();
+	void set_name(std::string name);
 	void announce(void);
 };
 
-
+Zombie* newZombie( std::string name );
+void randomChump( std::string name );

@@ -6,7 +6,15 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:25:17 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/05 13:25:18 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/05 13:51:06 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <Zombie.hpp>
+
+
+int main(void)
+{
+	
+	return 0;
+}
