@@ -1,8 +1,7 @@
 # ----------------------------------
 # PROJECT NAME
 # ----------------------------------
-NAME = MoreBrainz
-
+NAME = ThisIsBrain
 # ----------------------------------
 # COMPILATION AND FLAGS
 # ----------------------------------
@@ -32,8 +31,6 @@ WHITE       = \033[0;37m
 # SOURCES
 # ----------------------------------
 SRCS    = main.cpp \
-		Zombie.cpp \
-		zombieHorde.cpp \
 
 OBJS    = $(SRCS:.cpp=.o)
 
