@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:25:54 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/05 13:50:41 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/05 14:45:03 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ private:
 public:
 	Zombie();
 	~Zombie();
-	std::string get_name();
 	void set_name(std::string name);
 	void announce(void);
 };
