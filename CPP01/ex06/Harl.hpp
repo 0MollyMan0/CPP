@@ -6,11 +6,13 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 11:50:10 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/09 11:54:20 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/09 15:46:00 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
+#ifndef HARL_HPP
+# define HARL_HPP
+# include <string>
 
 class Harl
 {
@@ -24,3 +26,5 @@ public:
 	~Harl();
 	void	complain(std::string level);
 };
+
+#endif

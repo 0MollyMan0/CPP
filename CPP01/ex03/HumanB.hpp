@@ -6,13 +6,15 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 10:32:51 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/06 10:59:38 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/09 15:44:57 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <Weapon.hpp>
-#include <string>
-#include <iostream>
+#ifndef HUMANB_HPP
+# define HUMANB_HPP
+# include <Weapon.hpp>
+# include <string>
+# include <iostream>
 
 class HumanB
 {
@@ -25,3 +27,5 @@ class HumanB
 		void	setWeapon(Weapon& weapon);
 		void	attack();
 };
+
+#endif

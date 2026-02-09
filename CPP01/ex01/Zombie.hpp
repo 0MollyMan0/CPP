@@ -6,11 +6,14 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:25:54 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/05 14:51:54 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/09 15:43:34 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
+
+#ifndef ZOMBIE_HPP
+# define ZOMBIE_HPP
+# include <string>
 
 class Zombie
 {
@@ -24,3 +27,5 @@ public:
 };
 
 Zombie* zombieHorde( int N, std::string name );
+
+#endif
