@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 11:50:03 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/09 15:16:41 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/09 15:10:53 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ Harl::~Harl()
 
 void	Harl::debug()
 {
-	std::cout << "[ DEBUG ]\n I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger.\n I really do!\n";
+	std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger. I really do!";
 }
 
 void	Harl::info()
 {
-	std::cout << "[ INFO ]\n I cannot believe adding extra bacon costs more money.\n You didn't put enough bacon in my burger!\n If you did, I wouldn't be asking for more!\n";
+	std::cout << "I cannot believe adding extra bacon costs more money. You didn't put enough bacon in my burger! If you did, I wouldn't be asking for more!";
 }
 
 void	Harl::warning()
 {
-	std::cout << "[ WARNING ]\n I think I deserve to have some extra bacon for free.\n I've been coming for years, whereas you started working here just last month.\n";
+	std::cout << "I think I deserve to have some extra bacon for free. I've been coming for years, whereas you started working here just last month.";
 }
 
 void	Harl::error()
 {
-	std::cout << "[ ERROR ]\n This is unacceptable!\n I want to speak to the manager now.\n";
+	std::cout << "This is unacceptable! I want to speak to the manager now.";
 }
 
 void	Harl::complain(std::string level)
@@ -46,6 +46,11 @@ void	Harl::complain(std::string level)
 	void (Harl::*f[4])() = { &Harl::debug, &Harl::info, &Harl::warning, &Harl::error };
 	while (levels[i] != level)
 		i++;
-	if (i < 5)
+	if (i > 4)
+		return ;
+	while (i >= 0)
+	{
 		(this->*f[i])();
+		i--;
+	}	
 }
