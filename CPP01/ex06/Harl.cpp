@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 11:50:03 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/09 15:10:53 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/09 15:30:53 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ Harl::~Harl()
 
 void	Harl::debug()
 {
-	std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger. I really do!";
+	std::cout << "\n[ DEBUG ]\nI love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger.\nI really do!\n";
 }
 
 void	Harl::info()
 {
-	std::cout << "I cannot believe adding extra bacon costs more money. You didn't put enough bacon in my burger! If you did, I wouldn't be asking for more!";
+	std::cout << "\n[ INFO ]\nI cannot believe adding extra bacon costs more money.\nYou didn't put enough bacon in my burger!\nIf you did, I wouldn't be asking for more!\n";
 }
 
 void	Harl::warning()
 {
-	std::cout << "I think I deserve to have some extra bacon for free. I've been coming for years, whereas you started working here just last month.";
+	std::cout << "\n[ WARNING ]\nI think I deserve to have some extra bacon for free.\nI've been coming for years, whereas you started working here just last month.\n";
 }
 
 void	Harl::error()
 {
-	std::cout << "This is unacceptable! I want to speak to the manager now.";
+	std::cout << "\n[ ERROR ]\nThis is unacceptable!\nI want to speak to the manager now.\n";
 }
 
 void	Harl::complain(std::string level)
@@ -44,13 +44,13 @@ void	Harl::complain(std::string level)
 	int i = 0;
 	std::string levels[4] = { "DEBUG", "INFO", "WARNING", "ERROR" };
 	void (Harl::*f[4])() = { &Harl::debug, &Harl::info, &Harl::warning, &Harl::error };
-	while (levels[i] != level)
+	while (levels[i] != level && i <= 4)
 		i++;
 	if (i > 4)
-		return ;
-	while (i >= 0)
+		std::cout << "[ Probably complaining about insignificant problems ]\n";
+	while (i <= 4)
 	{
 		(this->*f[i])();
-		i--;
+		i++;
 	}	
 }
