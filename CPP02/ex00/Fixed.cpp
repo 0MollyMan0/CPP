@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 09:14:43 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/10 09:51:20 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/10 09:53:57 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ Fixed& Fixed::operator=(const Fixed& other)
 	return *this;
 }
 
-Fixed::~Fixed() {}
+Fixed::~Fixed()
+{
+	std::cout << "Destructor called" << std::endl;
+}
 
 int Fixed::getRawBits(void) const
 {
