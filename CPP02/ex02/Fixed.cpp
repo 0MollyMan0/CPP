@@ -53,22 +53,42 @@ Fixed& Fixed::operator=(const Fixed& other)
 	return *this;
 }
 
+Fixed Fixed::operator+(const Fixed& other) const
+{
+	Fixed result(this->_raw + other._raw);
+	return result;
+}
+
+Fixed Fixed::operator-(const Fixed& other) const
+{
+	Fixed result(this->_raw - other._raw);
+	return result;
+}
+
 Fixed& Fixed::operator++(void)
 {
 	this->_raw++;
 	return *this;
 }
 
-Fixed& Fixed::++operator(void)
+Fixed Fixed::operator++(int)
 {
+	Fixed result(*this);
 	this->_raw++;
-	return *this;
+	return result;
 }
 
 Fixed& Fixed::operator--(void)
 {
 	this->_raw--;
 	return *this;
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed result(*this);
+	this->_raw--;
+	return result;
 }
 
 int Fixed::getRawBits(void) const
