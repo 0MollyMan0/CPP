@@ -6,11 +6,14 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 10:43:48 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/11 11:42:58 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/11 13:49:35 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Fixed.hpp"
+#ifndef POINT_HPP
+# define POINT_HPP
+# include "./Fixed.hpp"
+
 
 class Point
 {
@@ -29,3 +32,6 @@ public:
 	Fixed getY(void) const;
 };
 
+bool bsp(Point const a, Point const b, Point const c, Point const point);
+
+#endif

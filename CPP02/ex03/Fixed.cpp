@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 09:14:43 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/11 09:57:02 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/11 13:52:06 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,35 +17,29 @@
 Fixed::Fixed()
 {
 	this->_raw = 0;
-	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(int value)
 {
-	std::cout << "Int constructor called" << std::endl;
 	this->_raw = value << _fractionalBits;
 }
 
 Fixed::Fixed(float value)
 {
-	std::cout << "Float constructor called" << std::endl;
 	this->_raw = (int)roundf(value * (1 <<_fractionalBits));
 }
 
 Fixed::Fixed(const Fixed& other) 
 {
-	std::cout << "Copy constructor called" << std::endl;
 	*this = other;
 }
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
 }
 
 Fixed& Fixed::operator=(const Fixed& other)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
 		this->_raw = other._raw;
@@ -109,7 +103,6 @@ Fixed Fixed::operator--(int)
 
 int Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	return this->_raw;
 }
 

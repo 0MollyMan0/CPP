@@ -6,11 +6,11 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 10:44:05 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/11 12:05:47 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/11 14:08:12 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Point.hpp"
+#include <Point.hpp>
 
 static bool is_same(Point const a, Point const b)
 {
@@ -22,39 +22,31 @@ static bool is_same(Point const a, Point const b)
 
 static Fixed cal_w1(Point const a, Point const b, Point const c, Point const point)
 {
-	Fixed numerator;
-	Fixed denominator;
-	Fixed res;
+	Fixed numerator  = (b.getY() - c.getY()) * (point.getX() - c.getX()) + (c.getX() - b.getX()) * (point.getY() - c.getY());
+	Fixed denominator = (b.getY() - c.getY()) * (a.getX() - c.getX()) + (c.getX() - b.getX()) * (a.getY() - c.getY());
 	
-	numerator = a.getX()*(c.getY() - a.getY()) + (point.getY() - a.getY()) * (c.getX() - a.getX()) - point.getX() * (c.getY() - a.getY());
-	denominator = (b.getY() - a.getY()) * (c.getX() - a.getX()) - (b.getX() - a.getX()) * (c.getY() - a.getY());
-	res = numerator / denominator;
-	return (res); 
+	if (denominator == Fixed(0))
+		throw std::runtime_error("Triangle points are colinear, division by zero avoided");
+
+	return numerator / denominator;
 }
 
-static Fixed cal_w2(Point const a, Point const b, Point const c, Point const point, Fixed const w1)
+static Fixed cal_w2(Point const a, Point const b, Point const c, Point const point)
 {
-	Fixed numerator;
-	Fixed denominator;
-	Fixed res;
-	
-	numerator = point.getY() - a.getY() - w1 * (b.getY() - a.getY());
-	denominator = c.getY() - a.getY();
-	res = numerator / denominator;
-	return (res); 
+	Fixed numerator  = (c.getY() - a.getY()) * (point.getX() - c.getX()) + (a.getX() - c.getX()) * (point.getY() - c.getY());
+	Fixed denominator = (b.getY() - c.getY()) * (a.getX() - c.getX()) + (c.getX() - b.getX()) * (a.getY() - c.getY());
+	return numerator / denominator;
 }
-
 
 
 bool bsp(Point const a, Point const b, Point const c, Point const point)
-{	
+{
 	if (is_same(a, point) || is_same(b, point) || is_same(c, point))
-		return (false);
+		return false;
 
 	Fixed const w1 = cal_w1(a, b, c, point);
-	Fixed const w2 = cal_w2(a, b, c, point, w1);
-	if (w1 > 0 && w2 > 0 && (w1 + w2) < 1)
-		return (true);
-	else
-		return (false);
+	Fixed const w2 = cal_w2(a, b, c, point);
+	Fixed const w3 = Fixed(1) - w1 - w2;
+
+	return (w1 > 0 && w2 > 0 && w3 > 0);
 }
