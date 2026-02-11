@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 09:14:29 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/10 13:23:37 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/11 09:54:24 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,17 @@ class Fixed
 		Fixed& operator--(void);
 		Fixed operator--(int);
 		
-		friend bool operator>(const Fixed& f1, const Fixed& f2) const;
-		friend bool operator<(const Fixed& f1, const Fixed& f2) const;
-		friend bool operator<=(const Fixed& f1, const Fixed& f2) const;
-		friend bool operator>=(const Fixed& f1, const Fixed& f2) const;
-		friend bool operator==(const Fixed& f1, const Fixed& f2) const;
-		friend bool operator!=(const Fixed& f1, const Fixed& f2) const;
+		bool operator>(const Fixed& other) const;
+		bool operator<(const Fixed& other) const;
+		bool operator<=(const Fixed& other) const;
+		bool operator>=(const Fixed& other) const;
+		bool operator==(const Fixed& other) const;
+		bool operator!=(const Fixed& other) const;
+
+		static Fixed& min(Fixed& a, Fixed& b);
+		static Fixed& max(Fixed& a, Fixed& b);
+		static const Fixed& min(const Fixed& a, const Fixed& b);
+		static const Fixed& max(const Fixed& a, const Fixed& b);
 
 		int getRawBits(void) const;
 		void setRawBits(int);

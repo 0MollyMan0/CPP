@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 09:14:43 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/10 13:28:05 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/11 09:57:02 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,22 @@ Fixed Fixed::operator-(const Fixed& other) const
 	return result;
 }
 
+Fixed Fixed::operator*(const Fixed& other) const
+{
+	Fixed result;
+	long tmp = (long)this->_raw * (long)other._raw;
+	result.setRawBits(tmp >> _fractionalBits);
+	return result;
+}
+
+Fixed Fixed::operator/(const Fixed& other) const
+{
+	Fixed result;
+	long tmp = ((long)this->_raw << _fractionalBits) / other._raw;
+	result.setRawBits(tmp);
+	return result;
+}
+
 Fixed& Fixed::operator++(void)
 {
 	this->_raw++;
@@ -112,38 +128,66 @@ int Fixed::toInt() const
 	return this->_raw >> _fractionalBits;
 }
 
-bool operator>(const Fixed& f1, const Fixed& f2)
+bool Fixed::operator>(const Fixed& other) const
 {
-	return f1._raw > f2._raw;
+	return this->_raw > other._raw;
 }
 
-bool operator<(const Fixed& f1, const Fixed& f2)
+bool Fixed::operator<(const Fixed& other) const
 {
-	return f1._raw < f2._raw;
+	return this->_raw < other._raw;
 }
 
-bool operator>=(const Fixed& f1, const Fixed& f2)
+bool Fixed::operator>=(const Fixed& other) const
 {
-	return f1._raw >= f2._raw;
+	return this->_raw >= other._raw;
 }
 
-bool operator<=(const Fixed& f1, const Fixed& f2)
+bool Fixed::operator<=(const Fixed& other) const
 {
-	return f1._raw <= f2._raw;
+	return this->_raw <= other._raw;
 }
 
-bool operator==(const Fixed& f1, const Fixed& f2)
+bool Fixed::operator==(const Fixed& other) const
 {
-	return f1._raw == f2._raw;
+	return this->_raw == other._raw;
 }
 
-bool operator!=(const Fixed& f1, const Fixed& f2)
+bool Fixed::operator!=(const Fixed& other) const
 {
-	return f1._raw != f2._raw;
+	return this->_raw != other._raw;
+}
+
+Fixed& Fixed::min(Fixed& a, Fixed& b)
+{
+	if (a < b)
+		return a;
+	return b;
+}
+
+Fixed& Fixed::max(Fixed& a, Fixed& b)
+{
+	if (a > b)
+		return a;
+	return b;
+}
+
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
+{
+	if (a < b)
+		return a;
+	return b;
+}
+
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
+{
+	if (a > b)
+		return a;
+	return b;
 }
 
 std::ostream& operator<<(std::ostream& out, Fixed const& value)
 {
-    out << value.toFloat();
-    return out;
+	out << value.toFloat();
+	return out;
 }
