@@ -28,20 +28,22 @@ class Fixed
 		
 		Fixed& operator=(const Fixed& other);
 		
-		Fixed& operator+(const Fixed& other);
-		Fixed& operator-(const Fixed& other);
-		Fixed& operator*(const Fixed& other);
-		Fixed& operator/(const Fixed& other);
+		Fixed operator+(const Fixed& other) const;
+		Fixed operator-(const Fixed& other) const;
+		Fixed operator*(const Fixed& other) const;
+		Fixed operator/(const Fixed& other) const;
 
 		Fixed& operator++(void);
+		Fixed operator++(int);
 		Fixed& operator--(void);
+		Fixed operator--(int);
 		
-		friend bool operator>(const Fixed& f1, const Fixed& f2);
-		friend bool operator<(const Fixed& f1, const Fixed& f2);
-		friend bool operator<=(const Fixed& f1, const Fixed& f2);
-		friend bool operator>=(const Fixed& f1, const Fixed& f2);
-		friend bool operator==(const Fixed& f1, const Fixed& f2);
-		friend bool operator!=(const Fixed& f1, const Fixed& f2);
+		friend bool operator>(const Fixed& f1, const Fixed& f2) const;
+		friend bool operator<(const Fixed& f1, const Fixed& f2) const;
+		friend bool operator<=(const Fixed& f1, const Fixed& f2) const;
+		friend bool operator>=(const Fixed& f1, const Fixed& f2) const;
+		friend bool operator==(const Fixed& f1, const Fixed& f2) const;
+		friend bool operator!=(const Fixed& f1, const Fixed& f2) const;
 
 		int getRawBits(void) const;
 		void setRawBits(int);
