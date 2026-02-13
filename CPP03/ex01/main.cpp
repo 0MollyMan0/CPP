@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Point.cpp                                          :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/11 10:43:57 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/13 08:47:50 by anfouger         ###   ########.fr       */
+/*   Created: 2026/02/11 14:13:48 by anfouger          #+#    #+#             */
+/*   Updated: 2026/02/13 09:06:36 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Point.hpp"
+#include "./ScavTrap.hpp"
 
-Point::Point() : x(0), y(0) {}
-
-Point::Point(const float x, const float y) : x(x), y(y) 
-{}
-
-Point::Point(const Point& copy) : x(copy.x), y(copy.y){}
-
-Point::~Point()
+int main(void)
 {
-}
-
-Point& Point::operator=(const Point& other)
-{
-	(void)other;
-	return *this;
-}
-
-Fixed Point::getX(void) const
-{
-	return this->x;	
-}
-
-Fixed Point::getY(void) const
-{
-	return this->y;
+	ClapTrap clap("Didier");
+	ScavTrap scav("Michel");
+	
+	clap.attack("Michel");
+	scav.takeDamage(10);
+	clap.beRepaired(10);
+	scav.takeDamage(20);
+	scav.beRepaired(20);
+	
+	return 0;
 }
