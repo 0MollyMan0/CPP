@@ -1,7 +1,7 @@
 # ----------------------------------
 # PROJECT NAME
 # ----------------------------------
-NAME = Diamond
+NAME = Animals
 # ----------------------------------
 # COMPILATION AND FLAGS
 # ----------------------------------
@@ -31,7 +31,9 @@ WHITE       = \033[0;37m
 # SOURCES
 # ----------------------------------
 SRCS    = main.cpp \
-		
+		Animal.cpp \
+		Cat.cpp \
+		Dog.cpp \
 
 OBJS    = $(SRCS:.cpp=.o)
 

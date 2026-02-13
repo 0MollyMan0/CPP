@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 11:53:27 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/13 12:19:18 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/13 14:13:14 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ public:
 	Dog();
 	~Dog();
 
-	void makeSound(void);
+	void makeSound(void) const;
 };
 
 #endif
