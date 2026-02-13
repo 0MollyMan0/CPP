@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   WrongAnimal.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/13 11:50:52 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/13 14:38:54 by anfouger         ###   ########.fr       */
+/*   Created: 2026/02/13 14:20:00 by anfouger          #+#    #+#             */
+/*   Updated: 2026/02/13 14:38:32 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Animal.hpp"
+#include "./WrongAnimal.hpp"
 #include <iostream>
 
-Animal::Animal()
+WrongAnimal::WrongAnimal()
 {
-	std::cout << "Animal constructor called\n";
+	std::cout << "WrongAnimal constructor called\n";
 }
 
-Animal::~Animal()
+WrongAnimal::~WrongAnimal()
 {
-	std::cout << "Animal destructor called\n";
+	std::cout << "WrongAnimal destructor called\n";
 }
 
-std::string Animal::getType(void) const
+std::string WrongAnimal::getType(void) const
 {
 	return this->type;
 }
 
-void Animal::makeSound() const
+void WrongAnimal::makeSound() const
 {
-	std::cout << "* animal sound *\n";
+	std::cout << "* wrong animal sound *\n";
 }

@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/13 11:50:52 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/13 14:38:54 by anfouger         ###   ########.fr       */
+/*   Created: 2026/02/13 14:19:38 by anfouger          #+#    #+#             */
+/*   Updated: 2026/02/13 14:37:38 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Animal.hpp"
-#include <iostream>
+#ifndef WRONGANIMAL_HPP
+# define WRONGANIMAL_HPP
+#include <string>
 
-Animal::Animal()
+class WrongAnimal
 {
-	std::cout << "Animal constructor called\n";
-}
+	protected:
+		std::string type;
 
-Animal::~Animal()
-{
-	std::cout << "Animal destructor called\n";
-}
+	public:
+		WrongAnimal();
+		~WrongAnimal();
+		
+		std::string getType(void) const;
 
-std::string Animal::getType(void) const
-{
-	return this->type;
-}
+		void makeSound(void) const;
+};
 
-void Animal::makeSound() const
-{
-	std::cout << "* animal sound *\n";
-}
+#endif
