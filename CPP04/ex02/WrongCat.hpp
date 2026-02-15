@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 14:19:18 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/13 14:39:49 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/15 11:12:40 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ class WrongCat : public WrongAnimal
 		
 	public:
 		WrongCat();
+		WrongCat(const WrongCat&);
+		WrongCat& operator=(const WrongCat&);
 		~WrongCat();
 
 		void makeSound(void) const;
