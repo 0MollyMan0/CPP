@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/13 13:26:12 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/15 08:25:09 by anfouger         ###   ########.fr       */
+/*   Created: 2026/02/13 14:18:47 by anfouger          #+#    #+#             */
+/*   Updated: 2026/02/13 14:24:31 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Cat.hpp"
-#include "./Dog.hpp"
 #include "./WrongCat.hpp"
 #include <iostream>
 
-int main()
+WrongCat::WrongCat() : WrongAnimal()
 {
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	const WrongAnimal* x = new WrongCat();
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	std::cout << x->getType() << " " << std::endl;
-	i->makeSound();
-	j->makeSound();
-	x->makeSound();
-	meta->makeSound();
+	this->type = "WrongCat";
+	std::cout << "WrongCat constructor called\n";
+}
 
-	return (0);
+WrongCat::~WrongCat()
+{
+	std::cout << "WrongCat destructor called\n";
+}
+
+void WrongCat::makeSound() const
+{
+	std::cout << "Maaaaaaaaaaaaaaaaarw!\n";
 }
