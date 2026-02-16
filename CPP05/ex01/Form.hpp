@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 15:08:27 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/16 15:44:51 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/16 16:18:12 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 # include <string>
 # include <iostream>
 
+class Bureaucrat;
+
 class Form
 {
 private:
 	const std::string name;
-	bool isSigned;
 	const int gradeSign;
 	const int gradeExe;
+	bool isSigned;
 public:
 	Form(const std::string name, const int gradeSign, const int gradeExe);
 	Form(const Form& other);
@@ -33,6 +35,8 @@ public:
 	bool		getIsSigned() const;
 	int			getGradeSign() const;
 	int			getGradeExe() const;
+
+	void beSigned(Bureaucrat& bur);
 
 	class GradeTooHighException : public std::exception
 	{

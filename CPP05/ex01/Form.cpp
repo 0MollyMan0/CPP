@@ -6,11 +6,12 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 15:08:20 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/16 15:45:33 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/16 16:17:10 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Form.hpp"
+#include "./Bureaucrat.hpp"
 
 Form::Form(const std::string name, const int gradeSign, const int gradeExe) : name(name), gradeSign(gradeSign), gradeExe(gradeExe)
 {
@@ -51,6 +52,13 @@ int Form::getGradeSign() const
 int Form::getGradeExe() const
 {
 	return this->gradeExe;	
+}
+
+void Form::beSigned(Bureaucrat& bur)
+{
+	if (bur.getGrade() > this->gradeSign)
+		throw GradeTooLowException();
+	this->isSigned = true;
 }
 
 std::ostream& operator<<(std::ostream& out, const Form& form)

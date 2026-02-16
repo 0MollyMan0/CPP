@@ -6,13 +6,15 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 09:50:17 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/16 15:15:20 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/16 16:18:56 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 # include <string>
+
+class Form;
 
 class Bureaucrat
 {
@@ -31,6 +33,7 @@ public:
 
 	void decrementGrade();
 	void incrementGrade();
+	void signForm(Form& form);
 
 	class GradeTooHighException : public std::exception
 	{
