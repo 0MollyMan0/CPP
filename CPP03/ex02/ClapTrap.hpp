@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 14:13:58 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/13 09:10:24 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/16 09:10:29 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ protected:
 	unsigned int _attackDamage;
 public:
 	ClapTrap(std::string name);
+	ClapTrap(const ClapTrap& original);
+	ClapTrap& operator=(const ClapTrap& original);
 	virtual ~ClapTrap();
 
 	void attack(const std::string& target);
