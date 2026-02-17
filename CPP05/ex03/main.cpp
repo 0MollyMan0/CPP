@@ -6,71 +6,88 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 14:41:51 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/17 09:48:39 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/17 11:27:11 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
-
+#include "Intern.hpp"
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
 int main()
 {
-    std::srand(std::time(NULL));
 
-    std::cout << "=== Creation of the bureaucrats ===" << std::endl;
+    std::cout << "=== Creating bureaucrats ===" << std::endl;
     Bureaucrat boss("Boss", 1);
     Bureaucrat intern("Intern", 150);
     Bureaucrat mid("Mid", 70);
 
-    std::cout << std::endl;
-    std::cout << "=== Creation of the forms ===" << std::endl;
-    ShrubberyCreationForm shrub("home");
-    RobotomyRequestForm robot("Bender");
-    PresidentialPardonForm pardon("Arthur Dent");
+    std::cout << "\n=== Creating Intern ===" << std::endl;
+    Intern someIntern;
 
-    std::cout << std::endl;
-    std::cout << "=== Test 1 : execution without signature ===" << std::endl;
-    boss.executeForm(shrub);
+    std::cout << "\n=== Test 1: Valid form creation and execution ===" << std::endl;
+    AForm* shrub = someIntern.makeForm("shrubbery creation", "Home");
+    AForm* robot = someIntern.makeForm("robotomy request", "Bender");
+    AForm* pardon = someIntern.makeForm("presidential pardon", "Arthur Dent");
 
-    std::cout << std::endl;
-    std::cout << "=== Test 2 : signature with a too low grade ===" << std::endl;
-    intern.signForm(robot);
 
-    std::cout << std::endl;
-    std::cout << "=== Test 3 : signature valid, execution with a too low grade ===" << std::endl;
-    boss.signForm(robot);
-    intern.executeForm(robot);
+    boss.signForm(*shrub);
+    boss.executeForm(*shrub);
 
-    std::cout << std::endl;
-    std::cout << "=== Test 4 : execution valid Robotomy (many times) ===" << std::endl;
+    boss.signForm(*robot);
+    boss.executeForm(*robot);
+
+    boss.signForm(*pardon);
+    boss.executeForm(*pardon);
+
+    std::cout << "\n=== Test 2: Unknown form name ===" << std::endl;
+    AForm* unknown = someIntern.makeForm("magic form", "Target");
+    if (!unknown)
+        std::cout << "Received NULL as expected for unknown form\n";
+
+    std::cout << "\n=== Test 3: Execution without signature ===" << std::endl;
+    AForm* shrub2 = someIntern.makeForm("shrubbery creation", "Garden");
+    boss.executeForm(*shrub2);
+
+    std::cout << "\n=== Test 4: Sign with too low grade ===" << std::endl;
+    AForm* robot2 = someIntern.makeForm("robotomy request", "HAL");
+    intern.signForm(*robot2);
+
+    std::cout << "\n=== Test 5: Execute with too low grade ===" << std::endl;
+    boss.signForm(*robot2);
+    intern.executeForm(*robot2);
+
+    std::cout << "\n=== Test 6: Robotomy randomness ===" << std::endl;
+    
     for (int i = 0; i < 5; i++)
-        boss.executeForm(robot);
+        boss.executeForm(*robot2);
 
-    std::cout << std::endl;
-    std::cout << "=== Test 5 : Shrubbery ===" << std::endl;
-    boss.signForm(shrub);
-    boss.executeForm(shrub);
+    std::cout << "\n=== Test 7: Polymorphism ===" << std::endl;
+    AForm* forms[3];
+    forms[0] = someIntern.makeForm("shrubbery creation", "Park");
+    forms[1] = someIntern.makeForm("robotomy request", "R2D2");
+    forms[2] = someIntern.makeForm("presidential pardon", "Ford Prefect");
 
-    std::cout << std::endl;
-    std::cout << "=== Test 6 : Presidential Pardon ===" << std::endl;
-    boss.signForm(pardon);
-    boss.executeForm(pardon);
+    for (int i = 0; i < 3; i++)
+    {
+        boss.signForm(*forms[i]);
+        boss.executeForm(*forms[i]);
+    }
 
-    std::cout << std::endl;
-    std::cout << "=== Test 7 : Pure polymorphisme ===" << std::endl;
-    AForm* f = new RobotomyRequestForm("HAL 9000");
-    boss.signForm(*f);
-    boss.executeForm(*f);
-    delete f;
+    delete shrub;
+    delete robot;
+    delete pardon;
+    delete unknown;
+    delete shrub2;
+    delete robot2;
+    for (int i = 0; i < 3; i++)
+        delete forms[i];
 
-    std::cout << std::endl;
-    std::cout << "=== END OF TESTS ===" << std::endl;
-
+    std::cout << "\n=== END OF INTERN TESTS ===" << std::endl;
     return 0;
 }
+

@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 15:08:20 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/17 09:45:30 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/17 11:23:35 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ std::ostream& operator<<(std::ostream& out, const AForm& form)
 		itIsSigned = "isn't signed";
 	
 	out << form.getName()
-		<< ", form required a grade of " << form.getGradeSign()
+		<< ", this form required a grade of " << form.getGradeSign()
 		<< " to signed it and a grade of " << form.getGradeExe() << " to execute it, "
 		<< "the form " << itIsSigned;
 
