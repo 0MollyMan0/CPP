@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 15:08:27 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/16 19:23:18 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/17 09:44:31 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ private:
 	const int gradeSign;
 	const int gradeExe;
 	bool isSigned;
+	std::string target;
 public:
-	AForm(const std::string name, const int gradeSign, const int gradeExe);
+	AForm(const std::string name, const int gradeSign, const int gradeExe, std::string target);
 	AForm(const AForm& other);
-	~AForm();
+	virtual ~AForm();
 
 	AForm& operator=(const AForm& other);
 
@@ -35,15 +36,18 @@ public:
 	bool		getIsSigned() const;
 	int			getGradeSign() const;
 	int			getGradeExe() const;
+	std::string	getTarget() const;
 
 	void beSigned(Bureaucrat& bur);
+	void execute(Bureaucrat const & executor) const;
+	virtual void doAction() const = 0;
 
 	class GradeTooHighException : public std::exception
 	{
 		public:
 			const char* what() const throw()
 			{
-				return "Grade too high\n";
+				return "grade too high\n";
 			}
 	};
 
@@ -52,7 +56,16 @@ public:
 		public:
 			const char* what() const throw()
 			{
-				return "Grade too low\n";
+				return "grade too low\n";
+			}
+	};
+
+	class NotSignedException : public std::exception
+	{
+		public:
+			const char* what() const throw()
+			{
+				return "the form isn't signed\n";
 			}
 	};
 };

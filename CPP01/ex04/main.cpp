@@ -6,12 +6,11 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 14:08:56 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/09 11:44:39 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/17 09:20:26 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string>
-#include <iostream> // delete after
 #include <fstream>
 
 static bool parsing(std::string filename, std::string s1)
