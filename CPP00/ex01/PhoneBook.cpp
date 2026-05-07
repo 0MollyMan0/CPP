@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 10:18:48 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/05 09:26:24 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/05/07 09:48:10 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int	PhoneBook::indexEntry(void)
 	{
 		std::cout << "\nEnter the index of the contact you wanna see: ";
 		std::getline(std::cin, input);
-
+		if (std::cin.eof())
+			return (-1);
 		if (!isNumber(input))
 		{
 			std::cout << "Invalid index\n";
@@ -100,6 +101,8 @@ bool PhoneBook::addContact()
 		std::getline(std::cin, input);
 		if (isValidField(input))
 			break;
+		if (std::cin.eof())
+			return (false);
 		std::cout << "No empty fields are allowed\n";
 	} while (!isValidField(input));
 	contacts[newIndex].setFirstName(input);
@@ -110,6 +113,8 @@ bool PhoneBook::addContact()
 		std::getline(std::cin, input);
 		if (isValidField(input))
 			break;
+		if (std::cin.eof())
+			return (false);
 		std::cout << "No empty fields are allowed\n";
 	} while (!isValidField(input));
 	contacts[newIndex].setLastName(input);
@@ -120,6 +125,8 @@ bool PhoneBook::addContact()
 		std::getline(std::cin, input);
 		if (isValidField(input))
 			break;
+		if (std::cin.eof())
+			return (false);
 		std::cout << "No empty fields are allowed\n";
 	} while (!isValidField(input));
 	contacts[newIndex].setNickname(input);
@@ -130,6 +137,8 @@ bool PhoneBook::addContact()
 		std::getline(std::cin, input);
 		if (isValidField(input))
 			break;
+		if (std::cin.eof())
+			return (false);
 		std::cout << "No empty fields are allowed\n";
 	} while (!isValidField(input));
 	contacts[newIndex].setPhoneNumber(input);
@@ -140,6 +149,8 @@ bool PhoneBook::addContact()
 		std::getline(std::cin, input);
 		if (isValidField(input))
 			break;
+		if (std::cin.eof())
+			return (false);
 		std::cout << "No empty fields are allowed\n";
 	} while (!isValidField(input));
 	contacts[newIndex].setDarkestSecret(input);
@@ -150,11 +161,14 @@ bool PhoneBook::addContact()
 	return (true);
 }
 
-void PhoneBook::searchContact()
+bool PhoneBook::searchContact()
 {
 	int	index;
 	
 	printAllContact();
 	index = indexEntry();
+	if (index == -1)
+		return (false);
 	printContact(index);
+	return (true);
 }

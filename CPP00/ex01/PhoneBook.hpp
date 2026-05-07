@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 10:18:39 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/05 08:28:15 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/05/07 09:31:10 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class PhoneBook
 	public:
 		PhoneBook();
 		bool	addContact();
-		void	searchContact();
+		bool	searchContact();
 };
 
 #endif

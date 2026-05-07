@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 17:57:57 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/05 08:54:51 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/05/07 09:31:44 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,18 @@ int main(void)
 	while (running)
 	{
 		std::getline(std::cin, input);
+		if (std::cin.eof())
+			return (1);
 		if (input == "ADD")
-			phoneBook.addContact();
+		{
+			if(!phoneBook.addContact())
+				return (1);
+		}
 		else if (input == "SEARCH")
-			phoneBook.searchContact();
+		{
+			if (!phoneBook.searchContact())	
+				return (1);
+		}
 		else if (input == "EXIT")
 			running = 0;
 	}	
