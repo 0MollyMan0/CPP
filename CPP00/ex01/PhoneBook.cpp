@@ -6,13 +6,14 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 10:18:48 by anfouger          #+#    #+#             */
-/*   Updated: 2026/05/07 09:48:10 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/05/07 10:25:20 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 #include "utils.hpp"
 #include <iostream>
+#include <iomanip>
 
 PhoneBook::PhoneBook() 
 {
@@ -33,32 +34,13 @@ void PhoneBook::printAllContact()
 {
 	std::string value;
 	
-	std::cout << "Index     |First Name|Last name |Nickname  |\n";
-	for (int contactIndex = 0; contactIndex < numberContacts; contactIndex++)
+	std::cout << "     Index|First Name| Last name|  Nickname|\n";
+	for (int i = 0; i < numberContacts; i++)
 	{
-		std::cout << contactIndex << "         |";
-		for (int j = 0; j < 3; j++)
-		{
-			if (j == 0)
-				value = contacts[contactIndex].getFirstName();
-			else if (j == 1)
-				value = contacts[contactIndex].getLastName();
-			else if (j == 2)
-				value = contacts[contactIndex].getNickname();
-			for (size_t charIndex = 0; charIndex < 10; charIndex++)
-			{
-				if (charIndex < value.length())
-				{
-					if (value.length() > 10 && charIndex == 9)
-						std::cout << ".";
-					else
-						std::cout << value[charIndex];
-				}
-				else
-					std::cout << " ";
-			}
-			std::cout << "|";
-		}
+		std::cout << std::setw(10) << i << "|";
+		std::cout << std::setw(10) << contacts[i].getFirstName() << "|";
+		std::cout << std::setw(10) << contacts[i].getLastName() << "|";
+		std::cout << std::setw(10)<< contacts[i].getNickname() << "|";
 		std::cout << "\n";
 	}
 }
