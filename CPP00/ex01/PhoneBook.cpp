@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 10:18:48 by anfouger          #+#    #+#             */
-/*   Updated: 2026/05/07 10:25:20 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/05/07 16:52:18 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,29 @@ void PhoneBook::printAllContact()
 	for (int i = 0; i < numberContacts; i++)
 	{
 		std::cout << std::setw(10) << i << "|";
+		if (contacts[i].getFirstName().length() > 10)
+		{
+			for (int j = 0; j < 9; j++)
+				std::cout << contacts[i].getFirstName()[j];
+			std::cout << ".|";
+		}
+		else
 		std::cout << std::setw(10) << contacts[i].getFirstName() << "|";
+		if (contacts[i].getLastName().length() > 10)
+		{
+			for (int j = 0; j < 9; j++)
+				std::cout << contacts[i].getLastName()[j];
+			std::cout << ".|";
+		}
+		else
 		std::cout << std::setw(10) << contacts[i].getLastName() << "|";
+		if (contacts[i].getNickname().length() > 10)
+		{
+			for (int j = 0; j < 9; j++)
+				std::cout << contacts[i].getNickname()[j];
+			std::cout << ".|";
+		}
+		else
 		std::cout << std::setw(10)<< contacts[i].getNickname() << "|";
 		std::cout << "\n";
 	}
