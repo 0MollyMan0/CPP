@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 11:50:03 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/09 15:16:41 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/05/12 15:15:09 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,12 @@ void	Harl::complain(std::string level)
 	int i = 0;
 	std::string levels[4] = { "DEBUG", "INFO", "WARNING", "ERROR" };
 	void (Harl::*f[4])() = { &Harl::debug, &Harl::info, &Harl::warning, &Harl::error };
-	while (levels[i] != level)
+	while (i < 4)
+	{
+		if (levels[i] == level)
+		{
+			(this->*f[i])();
+		}
 		i++;
-	if (i < 5)
-		(this->*f[i])();
+	}
 }

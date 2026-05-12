@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 14:08:56 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/17 09:20:26 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/05/12 15:13:38 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,19 @@ static bool parsing(std::string filename, std::string s1)
 }
 
 int main(int ac, char **av)
-{	
-	std::string filename = av[1];
-	std::string s1 = av[2];
-	std::string s2 = av[3];
+{
 	std::string line;
 	std::string before;
 	std::string after;
 	size_t pos;
 	
-	if ( ac != 4 || !parsing(filename, s1))
+	if ( ac != 4)
 		return (1);
-	
+	std::string filename = av[1];
+	std::string s1 = av[2];
+	std::string s2 = av[3];
+	if (!parsing(filename, s1))
+		return (1);
 	std::ofstream outfile((filename + ".replace").c_str());
 	if (!outfile)
 		return (1);

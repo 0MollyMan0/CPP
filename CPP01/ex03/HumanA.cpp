@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 10:32:19 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/10 09:21:21 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/05/12 15:17:58 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ HumanA::~HumanA()
 
 void	HumanA::attack()
 {
-	std::cout << this->name << " attacks with their " << this->weapon.getType();
+	std::cout << this->name << " attacks with their " << this->weapon.getType() << std::endl;
 }
