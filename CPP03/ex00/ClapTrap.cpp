@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 14:14:13 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/16 09:10:55 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/05/21 10:27:07 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,25 @@ ClapTrap::~ClapTrap()
 
 void ClapTrap::attack(const std::string& target)
 {
-	if (this->_energyPoints > 0)
+	if (this->_energyPoints > 0 && this->_hitPoints > 0)
 	{
 		std::cout << "ClapTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!\n";
 		this->_energyPoints--;
 	}
 	else
-		std::cout << "ClapTrap " << this->_name << " no longer has energy!\n";
+		std::cout << "ClapTrap " << this->_name << " can't do anything!\n";
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	std::cout << "ClapTrap " << this->_name << " takes " << amount << " point of damage!\n";
-	this->_hitPoints -= amount;
+	if (this->_energyPoints > 0 && this->_hitPoints > 0)
+	{
+		std::cout << "ClapTrap " << this->_name << " takes " << amount << " point of damage!\n";
+		this->_hitPoints -= amount;
+	}
+	else
+		std::cout << "ClapTrap " << this->_name << " can't do anything!\n";
+	
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
