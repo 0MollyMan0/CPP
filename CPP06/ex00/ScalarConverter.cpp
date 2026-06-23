@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:45:20 by anfouger          #+#    #+#             */
-/*   Updated: 2026/06/23 19:24:56 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/06/23 19:27:34 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ bool ScalarConverter::isFloat(const std::string& literal)
 		|| isdigit(literal[0]))
 		&& isdigit(literal[literal.length() - 2])
 		&& isStringContains(literal, 1, '.')
-		&&	isdigit(literal[literal.length() - 1] == 'f')
+		&&	literal[literal.length() - 1] == 'f'
 	);
 }
 
