@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:45:20 by anfouger          #+#    #+#             */
-/*   Updated: 2026/06/23 17:20:45 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/06/23 17:48:55 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,20 +87,22 @@ LiteralType	ScalarConverter::detectType(const std::string& literal)
 
 bool isFloat(const std::string& literal)
 {
-
+	
+	return (0);
 }
 
 bool isDouble(const std::string& literal)
 {
 	
+	return (0);
 }
 	
 bool isInt(const std::string& literal)
 {
 	
+	return (0);
 }
 
-	
 bool ScalarConverter::isPseudoLiteral(const std::string& literal)
 {
     return (

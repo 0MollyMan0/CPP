@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:45:39 by anfouger          #+#    #+#             */
-/*   Updated: 2026/06/23 17:12:24 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/06/23 17:41:18 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class ScalarConverter
 {
 private:
 	ScalarConverter();
+	~ScalarConverter();
 	ScalarConverter(const ScalarConverter& other);
 	ScalarConverter& operator=(const ScalarConverter& other);
 	static LiteralType detectType(const std::string& literal);
@@ -37,7 +38,6 @@ private:
 	static bool isCharLiteral(const std::string& literal);
 public:
 	static void	convert(const std::string& literal);
-	~ScalarConverter();
 };
 
 
