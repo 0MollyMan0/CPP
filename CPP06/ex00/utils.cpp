@@ -6,12 +6,11 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 16:04:09 by anfouger          #+#    #+#             */
-/*   Updated: 2026/06/23 17:46:35 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/06/23 18:23:34 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./utils.hpp"
-#include <iostream>
 
 bool	isStringContains(const std::string& str, const int nb, const char contains)
 {
@@ -25,5 +24,5 @@ bool	isStringContains(const std::string& str, const int nb, const char contains)
 		if (str[i] == contains)
 			count++;
 	}
-	return (count == nb);	
+	return (count == nb);
 }
