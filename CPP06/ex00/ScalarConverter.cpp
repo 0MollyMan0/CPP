@@ -6,13 +6,13 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:45:20 by anfouger          #+#    #+#             */
-/*   Updated: 2026/06/23 18:25:29 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/06/23 19:24:56 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./ScalarConverter.hpp"
 #include "./utils.hpp"
-#include <limits>
+#include <limits.h>
 #include <iostream>
 #include <cmath>
 
@@ -60,6 +60,9 @@ void	ScalarConverter::convert(const std::string& literal)
 		std::cout << "INT detected" << std::endl;
 		break;
 
+	case INVALID:
+		std::cout << "INVALID detected" << std::endl;
+		break;
 	default:
 		break;
 	}
@@ -87,20 +90,40 @@ LiteralType	ScalarConverter::detectType(const std::string& literal)
 
 bool ScalarConverter::isFloat(const std::string& literal)
 {
-	(void)literal;
-	return (0);
+	return (
+		((literal[0] == '-' && isdigit(literal[1]))
+		|| isdigit(literal[0]))
+		&& isdigit(literal[literal.length() - 2])
+		&& isStringContains(literal, 1, '.')
+		&&	isdigit(literal[literal.length() - 1] == 'f')
+	);
 }
 
 bool ScalarConverter::isDouble(const std::string& literal)
 {
-	(void)literal;
-	return (0);
+	return (
+		((literal[0] == '-' && isdigit(literal[1]))
+		|| isdigit(literal[0]))
+		&& isdigit(literal[literal.length() - 1])
+		&& isStringContains(literal, 1, '.')
+	);
 }
 	
 bool ScalarConverter::isInt(const std::string& literal)
 {
-	(void)literal;
-	return (0);
+	for (size_t i = 0; i < literal.length(); i++)
+	{
+		if (!isdigit(literal[i])
+			|| (!isdigit(literal[i]) && i != 0))
+			return (false);
+	}
+	char *end;
+	long test = strtol(literal.c_str(), &end, 10);
+	if (*end != '\0')
+		return (false);
+	if (test > INT_MAX || test < INT_MIN)
+		return (false);
+	return (true);
 }
 
 bool ScalarConverter::isPseudoLiteral(const std::string& literal)

@@ -6,13 +6,14 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:45:39 by anfouger          #+#    #+#             */
-/*   Updated: 2026/06/23 17:41:18 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/06/23 19:14:25 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
-# include <string>
+# include <string.h>
+# include "./utils.hpp"
 
 enum LiteralType
 {
