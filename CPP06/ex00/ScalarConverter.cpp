@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:45:20 by anfouger          #+#    #+#             */
-/*   Updated: 2026/06/23 19:27:34 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/06/24 14:54:54 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,23 +90,62 @@ LiteralType	ScalarConverter::detectType(const std::string& literal)
 
 bool ScalarConverter::isFloat(const std::string& literal)
 {
-	return (
-		((literal[0] == '-' && isdigit(literal[1]))
-		|| isdigit(literal[0]))
-		&& isdigit(literal[literal.length() - 2])
-		&& isStringContains(literal, 1, '.')
-		&&	literal[literal.length() - 1] == 'f'
-	);
+	int	flag;
+	int	i;
+	
+	if (literal.empty())
+    	return false;
+	flag = 0;
+	i = 0;
+	if (literal[0] == '-')
+		i++;	
+	while (isdigit(literal[i]))
+	{
+		i++;
+		flag++;	
+	}
+	if (!flag || literal[i] != '.')
+		return (false);
+	i++;
+	flag = 0;
+	while (isdigit(literal[i]))
+	{
+		i++;
+		flag++;	
+	}
+	if (!flag || literal[i] != 'f' || (unsigned long)i != literal.length() - 1)
+		return (false);
+	return (true);
 }
 
 bool ScalarConverter::isDouble(const std::string& literal)
 {
-	return (
-		((literal[0] == '-' && isdigit(literal[1]))
-		|| isdigit(literal[0]))
-		&& isdigit(literal[literal.length() - 1])
-		&& isStringContains(literal, 1, '.')
-	);
+	int	flag;
+	int	i;
+	
+	if (literal.empty())
+    	return false;
+	flag = 0;
+	i = 0;
+	if (literal[0] == '-')
+		i++;	
+	while (isdigit(literal[i]))
+	{
+		i++;
+		flag++;	
+	}
+	if (!flag || literal[i] != '.')
+		return (false);
+	i++;
+	flag = 0;
+	while (isdigit(literal[i]))
+	{
+		i++;
+		flag++;	
+	}
+	if (!flag || (unsigned long)i != literal.length())
+		return (false);
+	return (true);
 }
 	
 bool ScalarConverter::isInt(const std::string& literal)
@@ -114,7 +153,7 @@ bool ScalarConverter::isInt(const std::string& literal)
 	for (size_t i = 0; i < literal.length(); i++)
 	{
 		if (!isdigit(literal[i])
-			|| (!isdigit(literal[i]) && i != 0))
+			&& (literal[i] != '-' && i == 0))
 			return (false);
 	}
 	char *end;
