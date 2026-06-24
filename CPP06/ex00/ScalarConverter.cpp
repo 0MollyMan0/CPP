@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:45:20 by anfouger          #+#    #+#             */
-/*   Updated: 2026/06/24 14:54:54 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/06/24 15:01:22 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ bool ScalarConverter::isFloat(const std::string& literal)
     	return false;
 	flag = 0;
 	i = 0;
-	if (literal[0] == '-')
+	if (literal[0] == '-' || literal[i] == '+')
 		i++;	
 	while (isdigit(literal[i]))
 	{
@@ -127,7 +127,7 @@ bool ScalarConverter::isDouble(const std::string& literal)
     	return false;
 	flag = 0;
 	i = 0;
-	if (literal[0] == '-')
+	if (literal[0] == '-' || literal[i] == '+')
 		i++;	
 	while (isdigit(literal[i]))
 	{
@@ -150,10 +150,12 @@ bool ScalarConverter::isDouble(const std::string& literal)
 	
 bool ScalarConverter::isInt(const std::string& literal)
 {
+	if (literal.empty())
+		return false;
 	for (size_t i = 0; i < literal.length(); i++)
 	{
 		if (!isdigit(literal[i])
-			&& (literal[i] != '-' && i == 0))
+			&& ((literal[i] != '-' && literal[i] != '+') && i == 0))
 			return (false);
 	}
 	char *end;
