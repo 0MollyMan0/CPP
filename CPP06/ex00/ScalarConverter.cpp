@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:45:20 by anfouger          #+#    #+#             */
-/*   Updated: 2026/07/09 11:44:09 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/07/09 11:58:08 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,11 +146,17 @@ void ScalarConverter::printInt(double value)
 }
 void ScalarConverter::printFloat(double value)
 {
-	std::cout << "float: " << static_cast<float>(value) << std::endl;
+	if (value != std::floor(value))
+		std::cout << "float: " << static_cast<float>(value) << std::endl;
+	else
+		std::cout << "float: " << static_cast<float>(value) << ".0f" << std::endl;
 }
 void ScalarConverter::printDouble(double value)
 {
-	std::cout << "double: " << value << std::endl;
+	if (value != std::floor(value))
+		std::cout << "double: " << value << std::endl;
+	else
+		std::cout << "double: " << value << ".0" << std::endl;
 }
 
 LiteralType	ScalarConverter::detectType(const std::string& literal)
