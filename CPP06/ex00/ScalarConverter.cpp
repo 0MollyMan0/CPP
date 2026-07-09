@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:45:20 by anfouger          #+#    #+#             */
-/*   Updated: 2026/06/24 15:01:22 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/06/24 16:35:54 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,45 @@ void	ScalarConverter::convert(const std::string& literal)
 	switch (detectType(literal))
 	{
 	case CHAR:
+	{
 		std::cout << "CHAR detected" << std::endl;
+		double value = literal[1];
+		displayConversions(value);
 		break;
+	}
 
 	case PSEUDO:
+	{
 		std::cout << "PSEUDO detected" << std::endl;
 		break;
+	}
 
 	case FLOAT:
+	{
 		std::cout << "FLOAT detected" << std::endl;
+		char *end;
+		double value = strtod(literal.c_str(), &end);
+		displayConversions(value);
 		break;
+	}
 
 	case DOUBLE:
+	{
 		std::cout << "DOUBLE detected" << std::endl;
+		char *end;
+		double value = strtod(literal.c_str(), &end);
+		displayConversions(value);
 		break;
+	}
 
 	case INT:
+	{
 		std::cout << "INT detected" << std::endl;
+		char *end;
+		double value = strtod(literal.c_str(), &end);
+		displayConversions(value);
 		break;
+	}
 
 	case INVALID:
 		std::cout << "INVALID detected" << std::endl;
@@ -68,23 +89,64 @@ void	ScalarConverter::convert(const std::string& literal)
 	}
 }
 
+void ScalarConverter::displayConversions(double value)
+{
+    printChar(value);
+    printInt(value);
+    printFloat(value);
+    printDouble(value);
+}
+
+void ScalarConverter::printChar(double value)
+{
+	if (value < std::numeric_limits<char>::min()
+		|| value > std::numeric_limits<char>::max())
+	{
+		std::cout << "char: impossible" << std::endl;
+		return ;	
+	}
+	char c = static_cast<char>(value);
+	if (isprint(c))
+		std::cout << "char: " << c << std::endl;
+	else
+		std::cout << "char: Non displayable" << std::endl;
+}
+void ScalarConverter::printInt(double value)
+{
+	if (value > std::numeric_limits<int>::max()
+        || value < std::numeric_limits<int>::min())
+    {
+        std::cout << "int: impossible" << std::endl;
+        return;
+    }
+    std::cout << "int: " << static_cast<int>(value) << std::endl;
+}
+void ScalarConverter::printFloat(double value)
+{
+	std::cout << "float: " << static_cast<float>(value) << std::endl;
+}
+void ScalarConverter::printDouble(double value)
+{
+	std::cout << "double: " << value << std::endl;
+}
+
 LiteralType	ScalarConverter::detectType(const std::string& literal)
 {
 	if (isCharLiteral(literal))
 		return CHAR;
-	
+
 	if (isPseudoLiteral(literal))
 		return PSEUDO;
-	
+
 	if (isFloat(literal))
 		return FLOAT;
-	
+
 	if (isDouble(literal))
 		return DOUBLE;
-	
+
 	if (isInt(literal))
 		return INT;
-	
+
 	return (INVALID);
 }
 
@@ -128,7 +190,7 @@ bool ScalarConverter::isDouble(const std::string& literal)
 	flag = 0;
 	i = 0;
 	if (literal[0] == '-' || literal[i] == '+')
-		i++;	
+		i++;
 	while (isdigit(literal[i]))
 	{
 		i++;
@@ -141,7 +203,7 @@ bool ScalarConverter::isDouble(const std::string& literal)
 	while (isdigit(literal[i]))
 	{
 		i++;
-		flag++;	
+		flag++;
 	}
 	if (!flag || (unsigned long)i != literal.length())
 		return (false);
@@ -162,7 +224,7 @@ bool ScalarConverter::isInt(const std::string& literal)
 	long test = strtol(literal.c_str(), &end, 10);
 	if (*end != '\0')
 		return (false);
-	if (test > INT_MAX || test < INT_MIN)
+	if (test > std::numeric_limits<int>::max() || test < std::numeric_limits<int>::min())
 		return (false);
 	return (true);
 }
@@ -182,8 +244,8 @@ bool ScalarConverter::isPseudoLiteral(const std::string& literal)
 bool ScalarConverter::isCharLiteral(const std::string& literal)
 {
 	return (
-		literal.length() == 3 
-		&& literal[0] == '\'' 
+		literal.length() == 3
+		&& literal[0] == '\''
 		&& literal[2] == '\''
 	);
 }
