@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:45:20 by anfouger          #+#    #+#             */
-/*   Updated: 2026/06/24 16:35:54 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/07/09 11:44:09 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	ScalarConverter::convert(const std::string& literal)
 	case PSEUDO:
 	{
 		std::cout << "PSEUDO detected" << std::endl;
+		printPseudo(literal);
 		break;
 	}
 
@@ -95,6 +96,28 @@ void ScalarConverter::displayConversions(double value)
     printInt(value);
     printFloat(value);
     printDouble(value);
+}
+
+void ScalarConverter::printPseudo(const std::string& value)
+{
+    std::cout << "char: impossible" << std::endl;
+    std::cout << "int: impossible" << std::endl;
+
+    if (value == "nan" || value == "nanf")
+    {
+        std::cout << "float: nanf" << std::endl;
+        std::cout << "double: nan" << std::endl;
+    }
+    else if (value == "+inf" || value == "+inff")
+    {
+        std::cout << "float: +inff" << std::endl;
+        std::cout << "double: +inf" << std::endl;
+    }
+    else
+    {
+        std::cout << "float: -inff" << std::endl;
+        std::cout << "double: -inf" << std::endl;
+    }
 }
 
 void ScalarConverter::printChar(double value)
@@ -232,12 +255,12 @@ bool ScalarConverter::isInt(const std::string& literal)
 bool ScalarConverter::isPseudoLiteral(const std::string& literal)
 {
     return (
-        literal == "nan"
-        || literal == "nanf"
-        || literal == "+inf"
-        || literal == "+inff"
-        || literal == "-inf"
-        || literal == "-inff"
+		literal == "nan"
+		|| literal == "nanf"
+		|| literal == "+inf"
+		|| literal == "+inff"
+		|| literal == "-inf"
+		|| literal == "-inff"
     );
 }
 

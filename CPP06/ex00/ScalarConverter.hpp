@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:45:39 by anfouger          #+#    #+#             */
-/*   Updated: 2026/06/24 16:02:19 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/07/09 11:44:19 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 
 enum LiteralType
 {
-    CHAR,
-    INT,
-    FLOAT,
-    DOUBLE,
-    PSEUDO,
-    INVALID
+	CHAR,
+	INT,
+	FLOAT,
+	DOUBLE,
+	PSEUDO,
+	INVALID
 };
+
 class ScalarConverter
 {
 private:
@@ -36,6 +37,7 @@ private:
 	static void printInt(double value);
 	static void printFloat(double value);
 	static void printDouble(double value);
+	static void printPseudo(const std::string& value);
 	static void displayConversions(double value);
 	static bool isFloat(const std::string& literal);
 	static bool isDouble(const std::string& literal);
