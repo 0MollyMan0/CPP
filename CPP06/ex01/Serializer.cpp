@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 14:05:06 by anfouger          #+#    #+#             */
-/*   Updated: 2026/07/12 14:39:18 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/07/12 15:20:52 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 
 Serializer::Serializer()
 {
+}
+
+Serializer::Serializer(const Serializer& other)
+{
+	(void)other;
+}
+
+Serializer& Serializer::operator=(const Serializer& other)
+{
+	(void)other;
+	return *this;
 }
 
 Serializer::~Serializer()
