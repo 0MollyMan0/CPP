@@ -6,19 +6,16 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 15:42:42 by anfouger          #+#    #+#             */
-/*   Updated: 2026/07/12 15:45:46 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/07/14 01:22:43 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <Base.hpp>
 
-class A
+class A : public Base
 {
 private:
-	
 public:
 	A();
 	~A();
 };
-
-

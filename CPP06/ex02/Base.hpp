@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 15:40:12 by anfouger          #+#    #+#             */
-/*   Updated: 2026/07/12 15:45:03 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/07/14 00:39:15 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 class Base
 {
 private:
-	
-public:
 	Base();
-	~Base();
+public:
+	virtual ~Base();
 };
-
