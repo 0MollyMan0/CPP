@@ -6,11 +6,13 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 15:42:42 by anfouger          #+#    #+#             */
-/*   Updated: 2026/07/14 01:22:43 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/07/14 02:57:36 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <Base.hpp>
+#ifndef A_HPP
+# define A_HPP
+# include "Base.hpp"
 
 class A : public Base
 {
@@ -19,3 +21,5 @@ public:
 	A();
 	~A();
 };
+
+#endif
