@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 02:49:17 by anfouger          #+#    #+#             */
-/*   Updated: 2026/07/17 08:51:31 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/07/17 09:54:38 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ public:
 	Array(const Array& copy);
 	Array& operator=(const Array& copy);
 	T& operator[](unsigned int n);
+	const T& operator[](unsigned int n) const;
 	~Array();
 	size_t	size() const;
 };
