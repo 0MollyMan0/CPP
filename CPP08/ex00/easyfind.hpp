@@ -6,25 +6,24 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/21 00:44:50 by anfouger          #+#    #+#             */
-/*   Updated: 2026/07/21 01:15:33 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/07/21 02:08:19 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EASYFIND_HPP
 # define EASYFIND_HPP
 # include <stdlib.h>
+# include <algorithm>
+# include <stdexcept>
 
 template <typename T>
-int	easyfind(int searching, T containers)
+typename T::iterator	easyfind(int searching, T &containers)
 {
-	int i = 0;
-	
-	while (searching != containers[i])
-		++i;
-	if (searching == containers[i])
-		return (0);
+	typename T::iterator	it = std::find(containers.begin(), containers.end(), searching);
+	if (it == containers.end())
+		throw std::runtime_error("Not found");
 	else
-		return (1);
+		return (it);
 }
 
 #endif
