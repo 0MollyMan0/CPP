@@ -31,7 +31,6 @@ WHITE       = \033[0;37m
 # SOURCES
 # ----------------------------------
 SRCS    = main.cpp \
-			Span.cpp \
 
 OBJS    = $(SRCS:.cpp=.o)
 
