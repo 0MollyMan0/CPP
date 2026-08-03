@@ -1,7 +1,7 @@
 # ----------------------------------
 # PROJECT NAME
 # ----------------------------------
-NAME = Bitcoin_Exchange
+NAME = btc
 # ----------------------------------
 # COMPILATION AND FLAGS
 # ----------------------------------
@@ -31,6 +31,7 @@ WHITE       = \033[0;37m
 # SOURCES
 # ----------------------------------
 SRCS    = main.cpp \
+			BitcoinExchange.cpp \
 
 OBJS    = $(SRCS:.cpp=.o)
 
