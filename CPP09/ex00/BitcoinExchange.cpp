@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:03:04 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/03 16:14:14 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/03 18:10:08 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,22 @@
 
 /* --- Private Functions --- */
 
-bool	BitcoinExchange::isValidDate(std::string date)
+bool	BitcoinExchange::isValidDate(std::string& date) const
 {
 	(void)date;
 	return (false);
 }
 
-bool	BitcoinExchange::isValidValue(double value)
+bool	BitcoinExchange::isValidValue(double value) const
 {
 	(void)value;
 	return (false);
+}
+
+double BitcoinExchange::getExchangeRate(const std::string& date) const
+{
+	(void)date;
+	return (0);
 }
 
 /* --- Public Functions --- */
@@ -47,12 +53,12 @@ BitcoinExchange::~BitcoinExchange()
 {
 }
 
-void BitcoinExchange::loadDatabase(std::string filename)
+void BitcoinExchange::loadDatabase(const std::string& filename)
 {
 	(void)filename;
 }
 
-void BitcoinExchange::processInput(std::string filename)
+void BitcoinExchange::processInput(const std::string& filename)
 {
 	(void)filename;	
 }
