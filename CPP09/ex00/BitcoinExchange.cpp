@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:03:04 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/09 09:01:51 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/09 11:27:11 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,33 @@
 
 /* --- Private Functions --- */
 
-bool	BitcoinExchange::isValidDate(std::string& date) const
+bool	BitcoinExchange::isValidDate(const std::string& date) const
 {
-	(void)date;
+	if (date.empty())
+	{
+		std::cout << "Error: bad input => No date" << std::endl;
+		return (false);
+	}
 	return (false);
 }
 
-bool	BitcoinExchange::isValidValue(double value) const
+bool	BitcoinExchange::isValidLine(const std::string& line) const
 {
-	(void)value;
+	std::string::size_type pos = line.find(" | ");
+	if (pos == std::string::npos)
+	{
+		std::cout << "Error: bad imput => No separator found" << std::endl;
+	}
+	return (false);
+}
+
+bool	BitcoinExchange::isValidValue(const std::string& value) const
+{
+	if (value.empty())
+	{
+		std::cout << "Error: bad input => No value" << std::endl;
+		return (false);
+	}
 	return (false);
 }
 
@@ -31,11 +49,11 @@ double BitcoinExchange::getExchangeRate(const std::string& date) const
 	std::map<std::string, double>::const_iterator	it;
 
 	it = _database.lower_bound(date);
-	if (it == _database.end() || it != _database.begin() && it->first > date)
+	if (it == _database.end() || (it != _database.begin() && it->first > date))
 		--it;
 	else if (it == _database.begin() && it->first != date)
-		throw DoesntHaveRateException;
-	return (0);
+		throw DoesntHaveRateException();
+	return (it->second);
 }
 
 /* --- Public Functions --- */
@@ -84,5 +102,39 @@ void BitcoinExchange::loadDatabase(const std::string& filename)
 
 void BitcoinExchange::processInput(const std::string& filename)
 {
-	(void)filename;	
+	std::string line;
+	std::ifstream file(filename.c_str());
+	if (!file)
+	{
+		std::cout << "Error: could not open file." << std::endl;
+		return ;
+	}
+	std::getline(file, line);
+	while (std::getline(file, line))
+	{
+		std::string date;
+		std::string value;
+		std::stringstream ss(line);
+
+		std::getline(ss, date, '|');
+		std::getline(ss, value);
+
+		if (!isValidLine(line))
+			continue;
+		if (!isValidDate(date))
+    		continue;
+		if (!isValidValue(value))
+			continue;
+
+		try
+		{
+			double exchangeRate = getExchangeRate(date);
+			double finialValue = std::strtod(value.c_str(), 0);
+			std::cout << finialValue * exchangeRate << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+	}
 }
