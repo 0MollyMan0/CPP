@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:03:04 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/09 12:48:42 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/09 13:38:16 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,8 @@ void BitcoinExchange::processInput(const std::string& filename)
 		{
 			double exchangeRate = getExchangeRate(date);
 			double finialValue = std::strtod(value.c_str(), 0);
-			std::cout << finialValue * exchangeRate << std::endl;
+			std::cout << date << " => " << finalValue
+					<< " = " << finialValue * exchangeRate << std::endl;
 		}
 		catch(const std::exception& e)
 		{
