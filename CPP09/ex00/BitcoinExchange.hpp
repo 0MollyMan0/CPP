@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:02:27 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/09 14:58:08 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/09 16:52:05 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ private:
 	int	stringToInt(std::string str) const;
 	bool isNumber(const std::string& str) const;
 	bool isValidDate(const std::string& date) const;
+	bool isValidDateSeparator(const std::string& date) const;
 	bool isValidValue(const std::string& value) const;
 	std::string::size_type isValidLine(const std::string& line) const;
 	double getExchangeRate(const std::string& date) const;

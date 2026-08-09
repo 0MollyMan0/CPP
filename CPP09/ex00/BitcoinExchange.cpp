@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:03:04 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/09 15:05:57 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/09 18:08:58 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,8 @@ bool	BitcoinExchange::isNumber(const std::string& str) const
 	return true;
 }
 
-bool	BitcoinExchange::isValidDate(const std::string& date) const
+bool	BitcoinExchange::isValidDateSeparator(const std::string& date) const
 {
-	if (date.empty())
-	{
-		std::cout << "Error: bad input => No date" << std::endl;
-		return (false);
-	}
-
 	std::string::size_type pos_sep = date.find("-");
 	pos_sep = date.find("-", pos_sep + 1);
 	if (pos_sep == std::string::npos)
@@ -53,6 +47,25 @@ bool	BitcoinExchange::isValidDate(const std::string& date) const
 		std::cout << "Error: bad input => Date doesnt have enougth separator" << std::endl;
 		return (false);
 	}
+	pos_sep = date.find("-", pos_sep + 1);
+	if (pos_sep != std::string::npos)
+	{
+		std::cout << "Error: bad input => Date have too much separator" << std::endl;
+		return (false);
+	}
+	return (true);
+}
+
+bool	BitcoinExchange::isValidDate(const std::string& date) const
+{
+	if (date.empty())
+	{
+		std::cout << "Error: bad input => No date" << std::endl;
+		return (false);
+	}
+	
+	if (!isValidDateSeparator(date))
+		return (false);
 
 	std::string year_s;
 	std::string month_s;
@@ -76,11 +89,6 @@ bool	BitcoinExchange::isValidDate(const std::string& date) const
 	int year_i = stringToInt(year_s);
 	int month_i = stringToInt(month_s);
 	int day_i = stringToInt(day_s);
-	if (year_i < 2009 || year_i > 2027)
-	{
-		std::cout << "Error: bad input => Year not acceptable" << std::endl;
-		return (false);
-	}
 	if (month_i < 1 || month_i > 12)
 	{
 		std::cout << "Error: bad input => Month not acceptable" << std::endl;
@@ -98,12 +106,20 @@ bool	BitcoinExchange::isValidDate(const std::string& date) const
 			std::cout << "Error: bad input => Day not acceptable" << std::endl;
 			return (false);
 		}
-		// verif february with modulo and all that shit
+		if (day_i == 29 && !((year_i % 400 == 0) | (year_i % 4 == 0 && year_i % 100 != 0)))
+		{
+			std::cout << "Error: bad input => Day not acceptable" << std::endl;
+			return (false);
+		}
 	}
-	if (day_i == 31 && month_i % 2 != 1)
+	if (day_i == 31)
 	{
-		std::cout << "Error: bad input => Day not acceptable" << std::endl;
-		return (false);
+		if (month_i != 1 && month_i != 3 && month_i != 5 &&
+			month_i != 7 && month_i != 8 && month_i != 10 && month_i != 12)
+		{
+			std::cout << "Error: bad input => Day not acceptable" << std::endl;
+			return (false);
+		}
 	}
 	return (true);
 }
