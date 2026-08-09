@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:02:27 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/09 11:27:04 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/09 14:51:35 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ class BitcoinExchange
 private:
 	std::map<std::string, double> _database;
 
+	bool isNumber(const std::string& str) const;
 	bool isValidDate(const std::string& date) const;
 	bool isValidValue(const std::string& value) const;
-	bool isValidLine(const std::string& line) const;
+	std::string::size_type isValidLine(const std::string& line) const;
 	double getExchangeRate(const std::string& date) const;
 public:
 	BitcoinExchange();
