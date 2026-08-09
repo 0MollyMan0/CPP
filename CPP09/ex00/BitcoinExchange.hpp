@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:02:27 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/05 12:16:31 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/09 09:01:41 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ public:
 	BitcoinExchange(const BitcoinExchange& other);
 	BitcoinExchange& operator=(const BitcoinExchange& other);
 	~BitcoinExchange();
+
+	class DoesntHaveRateException : public std::exception
+	{
+		public:
+			const char* what() const throw()
+			{
+				return "Doesnt have rate for this date in the database\n";
+			}
+	};
 
 	void loadDatabase(const std::string& filename);
 	void processInput(const std::string& filename);

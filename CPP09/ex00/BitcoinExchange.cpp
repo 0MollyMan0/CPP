@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:03:04 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/05 12:34:06 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/09 09:01:51 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,13 @@ bool	BitcoinExchange::isValidValue(double value) const
 
 double BitcoinExchange::getExchangeRate(const std::string& date) const
 {
-	(void)date;
+	std::map<std::string, double>::const_iterator	it;
+
+	it = _database.lower_bound(date);
+	if (it == _database.end() || it != _database.begin() && it->first > date)
+		--it;
+	else if (it == _database.begin() && it->first != date)
+		throw DoesntHaveRateException;
 	return (0);
 }
 
@@ -68,10 +74,11 @@ void BitcoinExchange::loadDatabase(const std::string& filename)
 		std::string date;
 		std::string rate;
 		std::stringstream ss(line);
-		
+
 		std::getline(ss, date, ',');
 		std::getline(ss, rate);
-		this->_database.insert(std::make_pair(date, std::strtod(rate.c_str(), 0)));
+		double exchangeRate = std::strtod(rate.c_str(), 0);
+		this->_database.insert(std::make_pair(date, exchangeRate));
 	}
 }
 
