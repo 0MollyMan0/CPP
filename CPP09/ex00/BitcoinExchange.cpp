@@ -6,13 +6,24 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:03:04 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/09 14:51:54 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/09 15:05:57 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <BitcoinExchange.hpp>
 
 /* --- Private Functions --- */
+
+int	BitcoinExchange::stringToInt(std::string str) const
+{
+	int					res;
+	std::stringstream	ss;
+
+	ss << str;
+	ss >> res;
+
+	return (res);
+}
 
 bool	BitcoinExchange::isNumber(const std::string& str) const
 {
@@ -43,25 +54,57 @@ bool	BitcoinExchange::isValidDate(const std::string& date) const
 		return (false);
 	}
 
-	std::string year;
-	std::string month;
-	std::string day;
+	std::string year_s;
+	std::string month_s;
+	std::string day_s;
 	std::stringstream ss(date);
-	std::getline(ss, year, '-');
-	std::getline(ss, month, '-');
-	std::getline(ss, day);
+	std::getline(ss, year_s, '-');
+	std::getline(ss, month_s, '-');
+	std::getline(ss, day_s);
 
-	if (year.length() != 4 || month.length() != 2 || day.length() != 2)
+	if (year_s.length() != 4 || month_s.length() != 2 || day_s.length() != 2)
 	{
 		std::cout << "Error: bad input => Wrong length of date" << std::endl;
 		return (false);
 	}
-	if (!isNumber(year) || !isNumber(month) || !isNumber(day))
+	if (!isNumber(year_s) || !isNumber(month_s) || !isNumber(day_s))
 	{
 		std::cout << "Error: bad input => Not only number in date" << std::endl;
 		return (false);
 	}
-	
+
+	int year_i = stringToInt(year_s);
+	int month_i = stringToInt(month_s);
+	int day_i = stringToInt(day_s);
+	if (year_i < 2009 || year_i > 2027)
+	{
+		std::cout << "Error: bad input => Year not acceptable" << std::endl;
+		return (false);
+	}
+	if (month_i < 1 || month_i > 12)
+	{
+		std::cout << "Error: bad input => Month not acceptable" << std::endl;
+		return (false);
+	}
+	if (day_i < 1 || day_i > 31)
+	{
+		std::cout << "Error: bad input => Day not acceptable" << std::endl;
+		return (false);
+	}
+	if (month_i == 2)
+	{
+		if (day_i > 29)
+		{
+			std::cout << "Error: bad input => Day not acceptable" << std::endl;
+			return (false);
+		}
+		// verif february with modulo and all that shit
+	}
+	if (day_i == 31 && month_i % 2 != 1)
+	{
+		std::cout << "Error: bad input => Day not acceptable" << std::endl;
+		return (false);
+	}
 	return (true);
 }
 

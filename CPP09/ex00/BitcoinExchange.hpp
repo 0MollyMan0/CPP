@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:02:27 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/09 14:51:35 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/09 14:58:08 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class BitcoinExchange
 private:
 	std::map<std::string, double> _database;
 
+	int	stringToInt(std::string str) const;
 	bool isNumber(const std::string& str) const;
 	bool isValidDate(const std::string& date) const;
 	bool isValidValue(const std::string& value) const;
