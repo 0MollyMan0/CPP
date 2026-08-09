@@ -6,13 +6,63 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:03:04 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/09 18:08:58 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/09 18:26:45 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <BitcoinExchange.hpp>
 
 /* --- Private Functions --- */
+
+bool BitcoinExchange::isDouble(const std::string& literal) const
+{
+	int	flag;
+	int	i;
+	
+	if (literal.empty())
+    	return false;
+	flag = 0;
+	i = 0;
+	if (literal[0] == '-' || literal[i] == '+')
+		i++;
+	while (isdigit(literal[i]))
+	{
+		i++;
+		flag++;	
+	}
+	if (!flag || literal[i] != '.')
+		return (false);
+	i++;
+	flag = 0;
+	while (isdigit(literal[i]))
+	{
+		i++;
+		flag++;
+	}
+	if (!flag || (unsigned long)i != literal.length())
+		return (false);
+	return (true);
+}
+
+bool BitcoinExchange::isInt(const std::string& literal) const
+{
+	if (literal.empty())
+		return false;
+	for (size_t i = 0; i < literal.length(); i++)
+	{
+		if ((literal[i] == '-' || literal[i] == '+') && i == 0)
+			continue;
+		if (!isdigit(literal[i]))
+			return (false);
+	}
+	char *end;
+	long test = strtol(literal.c_str(), &end, 10);
+	if (*end != '\0')
+		return (false);
+	if (test > std::numeric_limits<int>::max() || test < std::numeric_limits<int>::min())
+		return (false);
+	return (true);
+}
 
 int	BitcoinExchange::stringToInt(std::string str) const
 {
@@ -126,11 +176,8 @@ bool	BitcoinExchange::isValidDate(const std::string& date) const
 
 bool	BitcoinExchange::isValidValue(const std::string& value) const
 {
-	if (value.empty())
-	{
-		std::cout << "Error: bad input => No value" << std::endl;
+	if (!isInt(value) && !isDouble(value))
 		return (false);
-	}
 	return (true);
 }
 
@@ -238,6 +285,8 @@ void BitcoinExchange::processInput(const std::string& filename)
 		{
 			double exchangeRate = getExchangeRate(date);
 			double finalValue = std::strtod(value.c_str(), 0);
+			if (finalValue < 0 || finalValue > 1000)
+				throw OffLimitsException();
 			std::cout << date << " => " << finalValue << " = " << finalValue * exchangeRate << std::endl;
 		}
 		catch(const std::exception& e)
