@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:03:04 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/09 11:27:11 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/09 12:48:42 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	BitcoinExchange::isValidDate(const std::string& date) const
 		std::cout << "Error: bad input => No date" << std::endl;
 		return (false);
 	}
-	return (false);
+	return (true);
 }
 
 bool	BitcoinExchange::isValidLine(const std::string& line) const
@@ -29,9 +29,16 @@ bool	BitcoinExchange::isValidLine(const std::string& line) const
 	std::string::size_type pos = line.find(" | ");
 	if (pos == std::string::npos)
 	{
-		std::cout << "Error: bad imput => No separator found" << std::endl;
+		std::cout << "Error: bad input => No separator found" << std::endl;
+		return (false);
 	}
-	return (false);
+	pos = line.find(" | ", pos + 3);
+	if (pos != std::string::npos)
+	{
+		std::cout << "Error: bad input => Too much separator found" << std::endl;
+		return (false);
+	}
+	return (true);
 }
 
 bool	BitcoinExchange::isValidValue(const std::string& value) const
@@ -41,7 +48,7 @@ bool	BitcoinExchange::isValidValue(const std::string& value) const
 		std::cout << "Error: bad input => No value" << std::endl;
 		return (false);
 	}
-	return (false);
+	return (true);
 }
 
 double BitcoinExchange::getExchangeRate(const std::string& date) const
@@ -112,15 +119,16 @@ void BitcoinExchange::processInput(const std::string& filename)
 	std::getline(file, line);
 	while (std::getline(file, line))
 	{
+		if (!isValidLine(line))
+			continue;
+
+		std::stringstream ss(line);
 		std::string date;
 		std::string value;
-		std::stringstream ss(line);
 
 		std::getline(ss, date, '|');
 		std::getline(ss, value);
 
-		if (!isValidLine(line))
-			continue;
 		if (!isValidDate(date))
     		continue;
 		if (!isValidValue(value))
