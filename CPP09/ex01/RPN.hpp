@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:31:02 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/10 23:51:49 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/11 00:10:22 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ class RPN
 {
 private:
 	std::stack<int> _stack;
+	int		charToFigure(char c) const;
+	void	createStack(std::string& input);
+	void	letMeCook();
 public:
 	RPN();
 	RPN(const RPN& other);

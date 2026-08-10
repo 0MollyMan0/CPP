@@ -6,13 +6,13 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:30:35 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/10 23:30:53 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/11 00:14:42 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-int main(int argc, char const *argv[])
+int main(int ac, char **av)
 {
 
 	return 0;
