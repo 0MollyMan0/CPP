@@ -6,18 +6,27 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:31:29 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/11 00:14:13 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/11 00:30:07 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-// Usefull
+// Private
+void	RPN::printStack(void)
+{
+	while (this->_stack.size() > 0)
+	{
+		std::cout << this->_stack.top() << " ";
+		this->_stack.pop();
+	}
+}
+
 int		RPN::charToFigure(char c) const
 {
 	if (!c)
 		return (false);
-	for (size_t i = 0; i <= 9; i++)
+	for (int i = 0; i <= 9; i++)
 	{
 		if (i + 48 == c)
 			return (i);
@@ -25,12 +34,13 @@ int		RPN::charToFigure(char c) const
 	return (-1);
 }
 
-void	RPN::createStack(std::string& input)
+// Public
+bool	RPN::createStack(std::string& input)
 {
 	if (input.empty())
 	{
 		std::cout << RED "Error => Input is empty" RESET << std::endl;
-		return ;
+		return (false);
 	}
 	for (size_t i = 0; i < input.length(); i++)
 	{
@@ -39,19 +49,20 @@ void	RPN::createStack(std::string& input)
 			if (!std::isdigit(input[i]) && input[i] != '-' && input[i] != '*' && input[i] != '/' && input[i] != '+')
 			{
 				std::cout << RED "Error => Character not accepeted: " RESET << input[i] << std::endl;
-				return ;
+				return (false);
 			}
-			this->_stack.push(charToFigure(input[i]));
+			this->_stack.push(input[i]);
 		}
 		else
 		{
 			if (input[i] != ' ')
 			{
 				std::cout << RED "Error => Missing space: " RESET << input[i] << std::endl;
-				return ;
+				return (false);
 			}
 		}
 	}
+	return (true);
 }
 
 void	RPN::letMeCook()
