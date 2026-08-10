@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:03:04 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/09 18:26:45 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/10 23:18:15 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,13 @@ bool	BitcoinExchange::isValidDateSeparator(const std::string& date) const
 	pos_sep = date.find("-", pos_sep + 1);
 	if (pos_sep == std::string::npos)
 	{
-		std::cout << "Error: bad input => Date doesnt have enougth separator" << std::endl;
+		std::cout << RED "Error: bad input => Date doesnt have enougth separator: " RESET << date << std::endl;
 		return (false);
 	}
 	pos_sep = date.find("-", pos_sep + 1);
 	if (pos_sep != std::string::npos)
 	{
-		std::cout << "Error: bad input => Date have too much separator" << std::endl;
+		std::cout << RED "Error: bad input => Date have too much separator: " RESET << date  << std::endl;
 		return (false);
 	}
 	return (true);
@@ -127,12 +127,12 @@ bool	BitcoinExchange::isValidDate(const std::string& date) const
 
 	if (year_s.length() != 4 || month_s.length() != 2 || day_s.length() != 2)
 	{
-		std::cout << "Error: bad input => Wrong length of date" << std::endl;
+		std::cout << RED "Error: bad input => Wrong length of date: " RESET << date << std::endl;
 		return (false);
 	}
 	if (!isNumber(year_s) || !isNumber(month_s) || !isNumber(day_s))
 	{
-		std::cout << "Error: bad input => Not only number in date" << std::endl;
+		std::cout << RED "Error: bad input => Not only number in date: " RESET << date << std::endl;
 		return (false);
 	}
 
@@ -141,24 +141,24 @@ bool	BitcoinExchange::isValidDate(const std::string& date) const
 	int day_i = stringToInt(day_s);
 	if (month_i < 1 || month_i > 12)
 	{
-		std::cout << "Error: bad input => Month not acceptable" << std::endl;
+		std::cout << RED "Error: bad input => Month not acceptable: " RESET << year_s << YELLOW << month_s << RESET << day_s << std::endl;
 		return (false);
 	}
 	if (day_i < 1 || day_i > 31)
 	{
-		std::cout << "Error: bad input => Day not acceptable" << std::endl;
+		std::cout << RED "Error: bad input => Day not acceptable: " RESET << year_s << month_s << YELLOW << day_s << RESET << std::endl;
 		return (false);
 	}
 	if (month_i == 2)
 	{
 		if (day_i > 29)
 		{
-			std::cout << "Error: bad input => Day not acceptable" << std::endl;
+			std::cout << RED "Error: bad input => Day not acceptable: " RESET << year_s << month_s << YELLOW << day_s << RESET << std::endl;
 			return (false);
 		}
 		if (day_i == 29 && !((year_i % 400 == 0) | (year_i % 4 == 0 && year_i % 100 != 0)))
 		{
-			std::cout << "Error: bad input => Day not acceptable" << std::endl;
+			std::cout << RED "Error: bad input => Day not acceptable: " RESET << year_s << month_s << YELLOW << day_s << RESET << std::endl;
 			return (false);
 		}
 	}
@@ -167,7 +167,7 @@ bool	BitcoinExchange::isValidDate(const std::string& date) const
 		if (month_i != 1 && month_i != 3 && month_i != 5 &&
 			month_i != 7 && month_i != 8 && month_i != 10 && month_i != 12)
 		{
-			std::cout << "Error: bad input => Day not acceptable" << std::endl;
+			std::cout << RED "Error: bad input => Day not acceptable: " RESET << year_s << month_s << YELLOW << day_s << RESET << std::endl;
 			return (false);
 		}
 	}
@@ -177,7 +177,10 @@ bool	BitcoinExchange::isValidDate(const std::string& date) const
 bool	BitcoinExchange::isValidValue(const std::string& value) const
 {
 	if (!isInt(value) && !isDouble(value))
-		return (false);
+	{
+		std::cout << RED "Error: bad input => Value not acceptable: " RESET << value << std::endl;
+		return (false);	
+	}
 	return (true);
 }
 
@@ -187,13 +190,13 @@ std::string::size_type BitcoinExchange::isValidLine(const std::string& line) con
 	std::string::size_type res = pos;
 	if (pos == std::string::npos)
 	{
-		std::cout << "Error: bad input => No separator found" << std::endl;
+		std::cout << RED "Error: bad input => No separator found: " RESET << line << std::endl;
 		return (0);
 	}
 	pos = line.find(" | ", pos + 3);
 	if (pos != std::string::npos)
 	{
-		std::cout << "Error: bad input => Too much separator found" << std::endl;
+		std::cout << RED "Error: bad input => Too much separator found" RESET << line << std::endl;
 		return (0);
 	}
 	return (res);
@@ -238,7 +241,7 @@ void BitcoinExchange::loadDatabase(const std::string& filename)
 	std::ifstream file(filename.c_str());
 	if (!file)
 	{
-		std::cout << "Couldn't open file named " << filename << std::endl;
+		std::cout << RED "Error: Couldn't open file named " RESET << filename << std::endl;
 		return ;
 	}
 	std::getline(file, line);
@@ -261,7 +264,7 @@ void BitcoinExchange::processInput(const std::string& filename)
 	std::ifstream file(filename.c_str());
 	if (!file)
 	{
-		std::cout << "Error: could not open file." << std::endl;
+		std::cout << RED "Error: Couldn't open file named " RESET << filename << std::endl;
 		return ;
 	}
 	std::getline(file, line);
@@ -291,7 +294,7 @@ void BitcoinExchange::processInput(const std::string& filename)
 		}
 		catch(const std::exception& e)
 		{
-			std::cerr << e.what() << '\n';
+			std::cerr << e.what() << line << '\n';
 		}
 	}
 }
