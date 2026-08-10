@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:03:04 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/10 23:18:15 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/10 23:28:00 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,24 +141,24 @@ bool	BitcoinExchange::isValidDate(const std::string& date) const
 	int day_i = stringToInt(day_s);
 	if (month_i < 1 || month_i > 12)
 	{
-		std::cout << RED "Error: bad input => Month not acceptable: " RESET << year_s << YELLOW << month_s << RESET << day_s << std::endl;
+		std::cout << RED "Error: bad input => Month not acceptable: " RESET << year_s << "-" YELLOW << month_s << RESET "-" << day_s << std::endl;
 		return (false);
 	}
 	if (day_i < 1 || day_i > 31)
 	{
-		std::cout << RED "Error: bad input => Day not acceptable: " RESET << year_s << month_s << YELLOW << day_s << RESET << std::endl;
+		std::cout << RED "Error: bad input => Day not acceptable: " RESET << year_s << "-" << month_s << "-" YELLOW << day_s << RESET << std::endl;
 		return (false);
 	}
 	if (month_i == 2)
 	{
 		if (day_i > 29)
 		{
-			std::cout << RED "Error: bad input => Day not acceptable: " RESET << year_s << month_s << YELLOW << day_s << RESET << std::endl;
+			std::cout << RED "Error: bad input => Day not acceptable: " RESET << year_s << "-" << month_s << "-" YELLOW << day_s << RESET << std::endl;
 			return (false);
 		}
 		if (day_i == 29 && !((year_i % 400 == 0) | (year_i % 4 == 0 && year_i % 100 != 0)))
 		{
-			std::cout << RED "Error: bad input => Day not acceptable: " RESET << year_s << month_s << YELLOW << day_s << RESET << std::endl;
+			std::cout << RED "Error: bad input => Day not acceptable: " RESET << year_s << "-" << month_s << "-" YELLOW << day_s << RESET << std::endl;
 			return (false);
 		}
 	}
@@ -167,7 +167,7 @@ bool	BitcoinExchange::isValidDate(const std::string& date) const
 		if (month_i != 1 && month_i != 3 && month_i != 5 &&
 			month_i != 7 && month_i != 8 && month_i != 10 && month_i != 12)
 		{
-			std::cout << RED "Error: bad input => Day not acceptable: " RESET << year_s << month_s << YELLOW << day_s << RESET << std::endl;
+			std::cout << RED "Error: bad input => Day not acceptable: " RESET << year_s << "-" << month_s << "-" YELLOW << day_s << RESET << std::endl;
 			return (false);
 		}
 	}
@@ -196,7 +196,7 @@ std::string::size_type BitcoinExchange::isValidLine(const std::string& line) con
 	pos = line.find(" | ", pos + 3);
 	if (pos != std::string::npos)
 	{
-		std::cout << RED "Error: bad input => Too much separator found" RESET << line << std::endl;
+		std::cout << RED "Error: bad input => Too much separator found: " RESET << line << std::endl;
 		return (0);
 	}
 	return (res);
