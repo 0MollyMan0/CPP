@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:30:35 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/11 00:30:40 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/11 01:33:01 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int main(int ac, char **av)
 	RPN test;
 	std::string input = std::string(av[1]);
 
-	if (!test.createStack(input))
-		return (1);
-	test.printStack();
+	test.calculate(input);
 	return (0);
 }

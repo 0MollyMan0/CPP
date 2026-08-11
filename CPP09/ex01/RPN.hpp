@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:31:02 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/11 00:30:57 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/11 02:02:19 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stack>
 # include <string>
 # include <iostream>
+# include <limits>
 
 # define RESET "\033[0m"
 # define BLACK "\033[1;30m"
@@ -31,17 +32,20 @@
 class RPN
 {
 private:
-	std::stack<char> _stack;
+	std::stack<int> _stack;
 	int		charToFigure(char c) const;
+	bool	verifyStack(std::string& input);
+	bool	doDiv(void);
+	bool	doMult(void);
+	bool	doSub(void);
+	bool	doAdd(void);
 public:
 	RPN();
 	RPN(const RPN& other);
 	RPN& operator=(const RPN& other);
 	~RPN();
 
-	bool	createStack(std::string& input);
-	void	letMeCook();
-	void	printStack(void);
+	void	calculate(std::string& input);
 };
 
 #endif
