@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:47:05 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/12 02:24:53 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/12 02:32:01 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ private:
 	std::vector<int> _vector;
 	std::deque<int> _deque;
 	bool	isInt(const std::string& literal) const;
-	bool	createVectorAndDeque(char **argv);
+	bool	addToVectorAndDeque(const std::string& literal);
 public:
 	PmergeMe();
 	PmergeMe(PmergeMe& other);
 	PmergeMe& operator=(PmergeMe& other);
 	~PmergeMe();
+	bool	sort(char **argv);
 };
 
 

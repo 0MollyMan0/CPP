@@ -31,7 +31,7 @@ WHITE       = \033[0;37m
 # SOURCES
 # ----------------------------------
 SRCS    = main.cpp \
-			RPN.cpp \
+			PmergeMe.cpp \
 
 OBJS    = $(SRCS:.cpp=.o)
 
