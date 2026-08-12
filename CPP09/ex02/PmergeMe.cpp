@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:46:34 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/13 01:33:53 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/13 01:39:06 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,20 +115,27 @@ bool	PmergeMe::dequePart(int nb_input, char **input)
 // Public
 bool	PmergeMe::sort(int nb_input, char **input)
 {
-	struct timeval before, after;
+	struct timeval vBefore, vAfter, dBefore, dAfter;
 	
-	gettimeofday(&before, NULL);
+	gettimeofday(&vBefore, NULL);
 	if (!vectorPart(nb_input, input))
 		return (false);
-	gettimeofday(&after, NULL);
-
-	double us = (after.tv_sec - before.tv_sec) * 1000000.0
-		+ (after.tv_usec - before.tv_usec);
-
-	std::cout << "Time to process a range of " << nb_input - 1 
-		<< " elements with std::vector: " << us << " us" << std::endl;
+	gettimeofday(&vAfter, NULL);
+	
+	gettimeofday(&dBefore, NULL);
 	if (!dequePart(nb_input, input))
 		return (false);
+	gettimeofday(&dAfter, NULL);
+
+	double us = (vAfter.tv_sec - vBefore.tv_sec) * 1000000.0
+		+ (vAfter.tv_usec - vBefore.tv_usec);
+	std::cout << "Time to process a range of " << nb_input - 1 
+		<< " elements with std::vector: " << us << " us" << std::endl;
+
+	us = (dAfter.tv_sec - dBefore.tv_sec) * 1000000.0
+		+ (dAfter.tv_usec - dBefore.tv_usec);
+	std::cout << "Time to process a range of " << nb_input - 1 
+		<< " elements with std::deque: " << us << " us" << std::endl;
 	return (true);
 }
 
