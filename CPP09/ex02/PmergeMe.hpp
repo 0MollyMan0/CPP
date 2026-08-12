@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:47:05 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/13 00:09:37 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/13 00:28:21 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,23 @@
 class PmergeMe
 {
 private:
-	std::vector<int> _vector;
-	std::vector<std::pair<int, int> > _vectorPair;
-	std::deque<int> _deque;
+	// Utils
 	void	swapPair(std::pair<int, int> _pair);
 	bool	isPositiveInt(const std::string& literal) const;
+	int		stringToInt(const std::string& str) const;
+
+	// Vector
+	std::vector<int> _vector;
+	std::vector<std::pair<int, int> > _vectorPair;
+	int		_vectorStraggler;
 	bool	addToVector(std::string& literal);
+	bool	vectorPart(char **input);
+	void	makingVectorPair(bool straggler);
+
+	// Deque
+	std::deque<int> _deque;
 	bool	addToDeque(std::string& literal);
 	bool	dequePart(char **input);
-	bool	vectorPart(char **input);
-	int		stringToInt(const std::string& str) const;
 public:
 	PmergeMe();
 	PmergeMe(const PmergeMe& other);

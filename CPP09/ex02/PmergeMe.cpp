@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:46:34 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/13 00:09:26 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/13 00:39:20 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,22 @@ bool	PmergeMe::vectorPart(char **input)
 			return (false);
 		i++;
 	}
+	makingVectorPair(i - 1 % 2 != 0);
 	return (true);
+}
+
+void	PmergeMe::makingVectorPair(bool straggler)
+{
+	for (std::vector<int>::iterator it = this->_vector.begin(); it != this->_vector.end(); it+=2)
+	{
+		if (straggler && it + 1 == this->_vector.end())
+		{
+			this->_vectorStraggler = *it;
+			break;
+		}
+		else
+			this->_vectorPair.push_back(*it, *it + 1);
+	}
 }
 
 bool	PmergeMe::dequePart(char **input)
@@ -94,7 +109,7 @@ bool	PmergeMe::dequePart(char **input)
 	while (input[i])
 	{
 		std::string tmp = std::string(input[i]);
-		if (!addToVector(tmp))
+		if (!addToDeque(tmp))
 			return (false);
 		i++;
 	}
