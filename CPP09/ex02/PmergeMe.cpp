@@ -6,13 +6,21 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:46:34 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/13 01:39:06 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/13 01:53:59 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-// Private
+// ==== PRIVATE ==== //
+
+// === Utils === //
+double	PmergeMe::getDiffInUs(timeval before, timeval after)
+{
+	return((after.tv_sec - before.tv_sec) * 1000000.0
+		+ (after.tv_usec - before.tv_usec));
+}
+
 void	PmergeMe::swapPair(std::pair<int, int> _pair)
 {
 	int tmp = _pair.first;
@@ -51,17 +59,7 @@ bool PmergeMe::isPositiveInt(const std::string& supposed_int) const
 	return (true);
 }
 
-bool	PmergeMe::addToDeque(std::string& supposed_int)
-{
-	if (!isPositiveInt(supposed_int))
-	{
-		std::cerr << RED "ERROR => Not a positive int: " RESET << supposed_int << std::endl;
-		return (false);
-	}
-	else
-		this->_deque.push_back(stringToInt(supposed_int));
-	return (true);
-}
+// === Vector === //
 
 bool	PmergeMe::addToVector(std::string& supposed_int)
 {
@@ -101,6 +99,20 @@ void	PmergeMe::makingVectorPair(bool straggler)
 	}
 }
 
+// === Deque === //
+
+bool	PmergeMe::addToDeque(std::string& supposed_int)
+{
+	if (!isPositiveInt(supposed_int))
+	{
+		std::cerr << RED "ERROR => Not a positive int: " RESET << supposed_int << std::endl;
+		return (false);
+	}
+	else
+		this->_deque.push_back(stringToInt(supposed_int));
+	return (true);
+}
+
 bool	PmergeMe::dequePart(int nb_input, char **input)
 {
 	for (int i = 1; i < nb_input; i++)
@@ -112,7 +124,7 @@ bool	PmergeMe::dequePart(int nb_input, char **input)
 	return (true);
 }
 
-// Public
+// ==== PUBLIC ==== //
 bool	PmergeMe::sort(int nb_input, char **input)
 {
 	struct timeval vBefore, vAfter, dBefore, dAfter;
@@ -127,13 +139,21 @@ bool	PmergeMe::sort(int nb_input, char **input)
 		return (false);
 	gettimeofday(&dAfter, NULL);
 
-	double us = (vAfter.tv_sec - vBefore.tv_sec) * 1000000.0
-		+ (vAfter.tv_usec - vBefore.tv_usec);
+	std::cout << "Before: ";
+	for (int i = 1; i < nb_input; i++)
+		std::cout << input[i] << " ";
+	std::cout << std::endl;
+	
+	std::cout << "After: ";
+	for (std::vector<int>::iterator it = this->_vector.begin(); it != this->_vector.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+
+	double us = getDiffInUs(vBefore, vAfter);
 	std::cout << "Time to process a range of " << nb_input - 1 
 		<< " elements with std::vector: " << us << " us" << std::endl;
 
-	us = (dAfter.tv_sec - dBefore.tv_sec) * 1000000.0
-		+ (dAfter.tv_usec - dBefore.tv_usec);
+	us = getDiffInUs(dBefore, dAfter);
 	std::cout << "Time to process a range of " << nb_input - 1 
 		<< " elements with std::deque: " << us << " us" << std::endl;
 	return (true);

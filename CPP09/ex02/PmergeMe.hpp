@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:47:05 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/13 01:31:09 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/13 01:46:05 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ private:
 	void	swapPair(std::pair<int, int> _pair);
 	bool	isPositiveInt(const std::string& literal) const;
 	int		stringToInt(const std::string& str) const;
+	double	getDiffInUs(timeval before, timeval after);
 
 	// Vector
 	std::vector<int> _vector;
