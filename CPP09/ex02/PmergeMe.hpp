@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:47:05 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/12 02:32:01 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/12 23:28:56 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,18 @@
 # include <vector>
 # include <deque>
 # include <iostream>
+# include <string>
+# include <sstream>
+# include <limits>
 
 class PmergeMe
 {
 private:
 	std::vector<int> _vector;
 	std::deque<int> _deque;
-	bool	isInt(const std::string& literal) const;
-	bool	addToVectorAndDeque(const std::string& literal);
+	bool	isPositiveInt(const std::string& literal) const;
+	bool	addToVectorAndDeque(std::string& literal);
+	int		stringToInt(const std::string& str) const;
 public:
 	PmergeMe();
 	PmergeMe(PmergeMe& other);
