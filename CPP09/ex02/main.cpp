@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:46:03 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/12 02:51:44 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/13 00:49:41 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	
 	PmergeMe Johnson;
 
-	if (!Johnson.sort(argv))
+	if (!Johnson.sort(argc, argv))
 		return (1);
 	return 0;
 }

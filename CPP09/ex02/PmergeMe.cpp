@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:46:34 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/13 00:39:20 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/13 01:33:53 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,15 @@ bool	PmergeMe::addToVector(std::string& supposed_int)
 	return (true);
 }
 
-bool	PmergeMe::vectorPart(char **input)
+bool	PmergeMe::vectorPart(int nb_input, char **input)
 {
-	int	i = 1;
-	while (input[i])
+	for (int i = 1; i < nb_input; i++)
 	{
 		std::string tmp = std::string(input[i]);
 		if (!addToVector(tmp))
 			return (false);
-		i++;
 	}
-	makingVectorPair(i - 1 % 2 != 0);
+	makingVectorPair(nb_input - 1 % 2 != 0);
 	return (true);
 }
 
@@ -99,29 +97,37 @@ void	PmergeMe::makingVectorPair(bool straggler)
 			break;
 		}
 		else
-			this->_vectorPair.push_back(*it, *it + 1);
+			this->_vectorPair.push_back(std::make_pair(*it, *it + 1));
 	}
 }
 
-bool	PmergeMe::dequePart(char **input)
+bool	PmergeMe::dequePart(int nb_input, char **input)
 {
-	int i = 1;
-	while (input[i])
+	for (int i = 1; i < nb_input; i++)
 	{
 		std::string tmp = std::string(input[i]);
 		if (!addToDeque(tmp))
 			return (false);
-		i++;
 	}
 	return (true);
 }
 
 // Public
-bool	PmergeMe::sort(char **input)
+bool	PmergeMe::sort(int nb_input, char **input)
 {
-	if (!vectorPart(input))
+	struct timeval before, after;
+	
+	gettimeofday(&before, NULL);
+	if (!vectorPart(nb_input, input))
 		return (false);
-	if (!dequePart(input))
+	gettimeofday(&after, NULL);
+
+	double us = (after.tv_sec - before.tv_sec) * 1000000.0
+		+ (after.tv_usec - before.tv_usec);
+
+	std::cout << "Time to process a range of " << nb_input - 1 
+		<< " elements with std::vector: " << us << " us" << std::endl;
+	if (!dequePart(nb_input, input))
 		return (false);
 	return (true);
 }

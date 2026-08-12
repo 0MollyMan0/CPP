@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:47:05 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/13 00:28:21 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/13 01:31:09 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include <sstream>
 # include <limits>
 # include <cctype>
+# include <sys/time.h>
 
 class PmergeMe
 {
@@ -45,19 +46,19 @@ private:
 	std::vector<std::pair<int, int> > _vectorPair;
 	int		_vectorStraggler;
 	bool	addToVector(std::string& literal);
-	bool	vectorPart(char **input);
+	bool	vectorPart(int nb_input, char **input);
 	void	makingVectorPair(bool straggler);
 
 	// Deque
 	std::deque<int> _deque;
 	bool	addToDeque(std::string& literal);
-	bool	dequePart(char **input);
+	bool	dequePart(int nb_input, char **input);
 public:
 	PmergeMe();
 	PmergeMe(const PmergeMe& other);
 	PmergeMe& operator=(const PmergeMe& other);
 	~PmergeMe();
-	bool	sort(char **argv);
+	bool	sort(int nb_input, char **argv);
 };
 
 
