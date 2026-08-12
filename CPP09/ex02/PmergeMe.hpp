@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:47:05 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/11 21:48:22 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/12 02:24:53 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,22 @@
 # define CYAN "\033[1;36m"
 # define WHITE "\033[1;37m"
 
-#include <stdlib.h>
-
+# include <stdlib.h>
+# include <vector>
+# include <deque>
+# include <iostream>
 
 class PmergeMe
 {
 private:
-	
+	std::vector<int> _vector;
+	std::deque<int> _deque;
+	bool	isInt(const std::string& literal) const;
+	bool	createVectorAndDeque(char **argv);
 public:
 	PmergeMe();
+	PmergeMe(PmergeMe& other);
+	PmergeMe& operator=(PmergeMe& other);
 	~PmergeMe();
 };
 
