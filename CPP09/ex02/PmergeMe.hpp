@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:47:05 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/12 23:28:56 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/13 00:09:37 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,25 @@
 # include <string>
 # include <sstream>
 # include <limits>
+# include <cctype>
 
 class PmergeMe
 {
 private:
 	std::vector<int> _vector;
+	std::vector<std::pair<int, int> > _vectorPair;
 	std::deque<int> _deque;
+	void	swapPair(std::pair<int, int> _pair);
 	bool	isPositiveInt(const std::string& literal) const;
-	bool	addToVectorAndDeque(std::string& literal);
+	bool	addToVector(std::string& literal);
+	bool	addToDeque(std::string& literal);
+	bool	dequePart(char **input);
+	bool	vectorPart(char **input);
 	int		stringToInt(const std::string& str) const;
 public:
 	PmergeMe();
-	PmergeMe(PmergeMe& other);
-	PmergeMe& operator=(PmergeMe& other);
+	PmergeMe(const PmergeMe& other);
+	PmergeMe& operator=(const PmergeMe& other);
 	~PmergeMe();
 	bool	sort(char **argv);
 };
