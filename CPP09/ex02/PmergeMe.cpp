@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:46:34 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/13 23:47:21 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/14 00:02:39 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool PmergeMe::isPositiveInt(const std::string& supposed_int) const
 	long test = strtol(supposed_int.c_str(), &end, 10);
 	if (*end != '\0' || test <= 0)
 		return (false);
-	if (test > std::numeric_limits<int>::max() || test < std::numeric_limits<int>::min())
+	if (test > std::numeric_limits<int>::max())
 		return (false);
 	return (true);
 }
@@ -81,7 +81,7 @@ bool	PmergeMe::vectorPart(int nb_input, char **input)
 		if (!addToVector(tmp))
 			return (false);
 	}
-	makingVectorPair(nb_input - 1 % 2 != 0);
+	makingVectorPair((nb_input - 1) % 2 != 0);
 	return (true);
 }
 
@@ -91,6 +91,7 @@ void	PmergeMe::makingVectorPair(bool straggler)
 	{
 		if (straggler && it + 1 == this->_vector.end())
 		{
+			this->_hasVectorStraggler = true;
 			this->_vectorStraggler = *it;
 			break;
 		}
@@ -133,7 +134,8 @@ bool	PmergeMe::dequePart(int nb_input, char **input)
 bool	PmergeMe::sort(int nb_input, char **input)
 {
 	struct timeval vBefore, vAfter, dBefore, dAfter;
-	
+	this->_hasVectorStraggler = false;
+
 	gettimeofday(&vBefore, NULL);
 	if (!vectorPart(nb_input, input))
 		return (false);
@@ -151,19 +153,19 @@ bool	PmergeMe::sort(int nb_input, char **input)
 	
 	std::cout << "After Making Pair: ";
 	for (std::vector<std::pair<int, int> > ::iterator it = this->_vectorPair.begin(); 
-			it != this->_vectorPair.end(); 
+			it != this->_vectorPair.end();
 			it++)
 		std::cout << "(" << it->first << ", " << it->second << ") ";
-	if (!this->_vectorStraggler)
+	if (this->_hasVectorStraggler)
 		std::cout << this->_vectorStraggler;
 	std::cout << std::endl;
 
 	std::cout << "After: ";
 	for (std::vector<int> ::iterator it = this->_vector.begin(); 
-			it != this->_vector.end(); 
+			it != this->_vector.end();
 			it++)
 		std::cout << *it << " ";
-	if (!this->_vectorStraggler)
+	if (this->_hasVectorStraggler)
 		std::cout << this->_vectorStraggler;
 	std::cout << std::endl;
 
