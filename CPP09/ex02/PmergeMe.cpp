@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:46:34 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/13 01:53:59 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/13 23:47:21 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,12 @@ void	PmergeMe::makingVectorPair(bool straggler)
 			break;
 		}
 		else
-			this->_vectorPair.push_back(std::make_pair(*it, *it + 1));
+		{
+			if (*it <= *(it + 1))
+				this->_vectorPair.push_back(std::make_pair(*it, *(it + 1)));
+			else
+				this->_vectorPair.push_back(std::make_pair(*(it + 1), *it));	
+		}
 	}
 }
 
@@ -144,9 +149,22 @@ bool	PmergeMe::sort(int nb_input, char **input)
 		std::cout << input[i] << " ";
 	std::cout << std::endl;
 	
+	std::cout << "After Making Pair: ";
+	for (std::vector<std::pair<int, int> > ::iterator it = this->_vectorPair.begin(); 
+			it != this->_vectorPair.end(); 
+			it++)
+		std::cout << "(" << it->first << ", " << it->second << ") ";
+	if (!this->_vectorStraggler)
+		std::cout << this->_vectorStraggler;
+	std::cout << std::endl;
+
 	std::cout << "After: ";
-	for (std::vector<int>::iterator it = this->_vector.begin(); it != this->_vector.end(); it++)
+	for (std::vector<int> ::iterator it = this->_vector.begin(); 
+			it != this->_vector.end(); 
+			it++)
 		std::cout << *it << " ";
+	if (!this->_vectorStraggler)
+		std::cout << this->_vectorStraggler;
 	std::cout << std::endl;
 
 	double us = getDiffInUs(vBefore, vAfter);
