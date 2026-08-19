@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:47:05 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/13 23:53:28 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/14 01:54:42 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ private:
 	bool	addToVector(std::string& literal);
 	bool	vectorPart(int nb_input, char **input);
 	void	makingVectorPair(bool straggler);
+	std::vector<int> getBigFromVector(void);
 
 	// === Deque === //
 	std::deque<int> _deque;

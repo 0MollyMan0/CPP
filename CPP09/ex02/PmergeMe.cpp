@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:46:34 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/14 00:02:39 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/14 02:13:19 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@ double	PmergeMe::getDiffInUs(timeval before, timeval after)
 {
 	return((after.tv_sec - before.tv_sec) * 1000000.0
 		+ (after.tv_usec - before.tv_usec));
-}
-
-void	PmergeMe::swapPair(std::pair<int, int> _pair)
-{
-	int tmp = _pair.first;
-	_pair.first = _pair.second;
-	_pair.second = tmp;
 }
 
 int	PmergeMe::stringToInt(const std::string& str) const
@@ -61,6 +54,18 @@ bool PmergeMe::isPositiveInt(const std::string& supposed_int) const
 
 // === Vector === //
 
+std::vector<int> PmergeMe::getBigFromVector(void)
+{
+	std::vector<int> res;
+	for (std::vector<std::pair<int, int> >::iterator it = this->_vectorPair.begin();
+			it != this->_vectorPair.end();
+			it++)
+	{
+		res.push_back(it->second);
+	}
+	return (res);
+}
+
 bool	PmergeMe::addToVector(std::string& supposed_int)
 {
 	if (!isPositiveInt(supposed_int))
@@ -82,6 +87,7 @@ bool	PmergeMe::vectorPart(int nb_input, char **input)
 			return (false);
 	}
 	makingVectorPair((nb_input - 1) % 2 != 0);
+	std::vector<int> big = getBigFromVector();
 	return (true);
 }
 
