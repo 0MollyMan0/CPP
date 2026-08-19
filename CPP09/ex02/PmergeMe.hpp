@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:47:05 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/14 01:54:42 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/19 21:38:34 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ private:
 
 	bool	addToVector(std::string& literal);
 	bool	vectorPart(int nb_input, char **input);
-	void	makingVectorPair(bool straggler);
-	std::vector<int> getBigFromVector(void);
+	std::vector<std::pair<int, int> >	makingVectorPair(std::vector<int>& vector, bool straggler);
+	std::vector<int>	getBigFromVector(std::vector<std::pair<int, int> >& vectorPair);
+	std::vector<int>	fordJohnsonVector(std::vector<int> big);
 
 	// === Deque === //
 	std::deque<int> _deque;

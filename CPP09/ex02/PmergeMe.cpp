@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:46:34 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/14 02:13:19 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/19 21:43:05 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ bool PmergeMe::isPositiveInt(const std::string& supposed_int) const
 
 // === Vector === //
 
-std::vector<int> PmergeMe::getBigFromVector(void)
+std::vector<int> PmergeMe::getBigFromVector(std::vector<std::pair<int, int> >& vectorPair)
 {
 	std::vector<int> res;
-	for (std::vector<std::pair<int, int> >::iterator it = this->_vectorPair.begin();
-			it != this->_vectorPair.end();
+	for (std::vector<std::pair<int, int> >::iterator it = vectorPair.begin();
+			it != vectorPair.end();
 			it++)
 	{
 		res.push_back(it->second);
@@ -86,16 +86,17 @@ bool	PmergeMe::vectorPart(int nb_input, char **input)
 		if (!addToVector(tmp))
 			return (false);
 	}
-	makingVectorPair((nb_input - 1) % 2 != 0);
-	std::vector<int> big = getBigFromVector();
+	std::cout << "fordJohnson begin" << std::endl;
+	this->_vector = fordJohnsonVector(this->_vector);
 	return (true);
 }
 
-void	PmergeMe::makingVectorPair(bool straggler)
+std::vector<std::pair<int, int> > PmergeMe::makingVectorPair(std::vector<int>& vector, bool straggler)
 {
-	for (std::vector<int>::iterator it = this->_vector.begin(); it != this->_vector.end(); it+=2)
+	std::vector<std::pair<int, int> > vectorPair;
+	for (std::vector<int>::iterator it = vector.begin(); it != vector.end(); it+=2)
 	{
-		if (straggler && it + 1 == this->_vector.end())
+		if (straggler && it + 1 == vector.end())
 		{
 			this->_hasVectorStraggler = true;
 			this->_vectorStraggler = *it;
@@ -104,11 +105,27 @@ void	PmergeMe::makingVectorPair(bool straggler)
 		else
 		{
 			if (*it <= *(it + 1))
-				this->_vectorPair.push_back(std::make_pair(*it, *(it + 1)));
+				vectorPair.push_back(std::make_pair(*it, *(it + 1)));
 			else
-				this->_vectorPair.push_back(std::make_pair(*(it + 1), *it));	
+				vectorPair.push_back(std::make_pair(*(it + 1), *it));	
 		}
 	}
+	return (vectorPair);
+}
+
+std::vector<int> PmergeMe::fordJohnsonVector(std::vector<int> big)
+{
+	if (big.size() < 2)
+		return (big);
+
+	std::vector<std::pair<int, int> > vectorPair = makingVectorPair(big, big.size() % 2 != 0); 
+	big = getBigFromVector(vectorPair);
+	for (std::vector<int> ::iterator it = big.begin(); 
+			it != big.end();
+			it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+	return fordJohnsonVector(big);
 }
 
 // === Deque === //
@@ -139,49 +156,49 @@ bool	PmergeMe::dequePart(int nb_input, char **input)
 // ==== PUBLIC ==== //
 bool	PmergeMe::sort(int nb_input, char **input)
 {
-	struct timeval vBefore, vAfter, dBefore, dAfter;
+	// struct timeval vBefore, vAfter, dBefore, dAfter;
 	this->_hasVectorStraggler = false;
 
-	gettimeofday(&vBefore, NULL);
+	// gettimeofday(&vBefore, NULL);
 	if (!vectorPart(nb_input, input))
 		return (false);
-	gettimeofday(&vAfter, NULL);
+	// gettimeofday(&vAfter, NULL);
 	
-	gettimeofday(&dBefore, NULL);
+	// gettimeofday(&dBefore, NULL);
 	if (!dequePart(nb_input, input))
 		return (false);
-	gettimeofday(&dAfter, NULL);
+	// gettimeofday(&dAfter, NULL);
 
 	std::cout << "Before: ";
 	for (int i = 1; i < nb_input; i++)
 		std::cout << input[i] << " ";
 	std::cout << std::endl;
 	
-	std::cout << "After Making Pair: ";
-	for (std::vector<std::pair<int, int> > ::iterator it = this->_vectorPair.begin(); 
-			it != this->_vectorPair.end();
-			it++)
-		std::cout << "(" << it->first << ", " << it->second << ") ";
-	if (this->_hasVectorStraggler)
-		std::cout << this->_vectorStraggler;
-	std::cout << std::endl;
+	// std::cout << "After Making Pair: ";
+	// for (std::vector<std::pair<int, int> > ::iterator it = this->_vectorPair.begin(); 
+	// 		it != this->_vectorPair.end();
+	// 		it++)
+	// 	std::cout << "(" << it->first << ", " << it->second << ") ";
+	// if (this->_hasVectorStraggler)
+	// 	std::cout << this->_vectorStraggler;
+	// std::cout << std::endl;
 
 	std::cout << "After: ";
 	for (std::vector<int> ::iterator it = this->_vector.begin(); 
 			it != this->_vector.end();
 			it++)
 		std::cout << *it << " ";
-	if (this->_hasVectorStraggler)
-		std::cout << this->_vectorStraggler;
+	// if (this->_hasVectorStraggler)
+	// 	std::cout << this->_vectorStraggler;
 	std::cout << std::endl;
 
-	double us = getDiffInUs(vBefore, vAfter);
-	std::cout << "Time to process a range of " << nb_input - 1 
-		<< " elements with std::vector: " << us << " us" << std::endl;
+	// double us = getDiffInUs(vBefore, vAfter);
+	// std::cout << "Time to process a range of " << nb_input - 1 
+	// 	<< " elements with std::vector: " << us << " us" << std::endl;
 
-	us = getDiffInUs(dBefore, dAfter);
-	std::cout << "Time to process a range of " << nb_input - 1 
-		<< " elements with std::deque: " << us << " us" << std::endl;
+	// us = getDiffInUs(dBefore, dAfter);
+	// std::cout << "Time to process a range of " << nb_input - 1 
+	// 	<< " elements with std::deque: " << us << " us" << std::endl;
 	return (true);
 }
 
