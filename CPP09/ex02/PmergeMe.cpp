@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:46:34 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/20 03:33:57 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/20 21:52:56 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,55 +52,55 @@ bool PmergeMe::isPositiveInt(const std::string& supposed_int) const
 	return (true);
 }
 
-std::vector<size_t> PmergeMe::generateJacobsthal(size_t size)
-{
-    std::vector<size_t> jacob;
+// std::vector<size_t> PmergeMe::generateJacobsthal(size_t size)
+// {
+//     std::vector<size_t> jacob;
 
-    jacob.push_back(0);
-    jacob.push_back(1);
+//     jacob.push_back(0);
+//     jacob.push_back(1);
 
-    while (jacob.back() < size)
-    {
-        size_t n = jacob.size();
+//     while (jacob.back() < size)
+//     {
+//         size_t n = jacob.size();
 
-        jacob.push_back(
-            jacob[n - 1] + 2 * jacob[n - 2]
-        );
-    }
+//         jacob.push_back(
+//             jacob[n - 1] + 2 * jacob[n - 2]
+//         );
+//     }
 
-    return (jacob);
-}
+//     return (jacob);
+// }
 
 // === Vector === //
 
 std::vector<size_t> PmergeMe::getInsertionOrder(size_t size)
 {
-    std::vector<size_t> order;
+	std::vector<size_t> order;
 
-    if (size == 0)
-        return (order);
+	if (size == 0)
+		return (order);
 
-    order.push_back(1);
+	order.push_back(1);
 
-    size_t previous = 1;
-    size_t current = 3;
+	size_t previous = 1;
+	size_t current = 3;
 
-    while (previous < size)
-    {
-        size_t end = current;
+	while (previous < size)
+	{
+		size_t end = current;
 
-        if (end > size)
-            end = size;
+		if (end > size)
+			end = size;
 
-        for (size_t i = end; i > previous; --i)
-            order.push_back(i);
+		for (size_t i = end; i > previous; --i)
+			order.push_back(i);
 
-        size_t next = current + 2 * previous;
-        previous = current;
-        current = next;
-    }
+		size_t next = current + 2 * previous;
+		previous = current;
+		current = next;
+	}
 
-    return (order);
+	return (order);
 }
 
 void	displayVector(std::vector<int> vector)
@@ -238,7 +238,97 @@ bool	PmergeMe::dequePart(int nb_input, char **input)
 		if (!addToDeque(tmp))
 			return (false);
 	}
+	this->_deque = fordJohnsonDeque(this->_deque);
 	return (true);
+}
+
+void	displayDeque(std::deque<int> deque)
+{
+	for (std::deque<int> ::iterator it = deque.begin(); it != deque.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+}
+
+std::deque<int> PmergeMe::getBigFromDeque(std::deque<std::pair<int, int> >& dequePair)
+{
+	std::deque<int> res;
+	for (std::deque<std::pair<int, int> >::iterator it = dequePair.begin();
+			it != dequePair.end();
+			it++)
+	{
+		res.push_back(it->second);
+	}
+	return (res);
+}
+
+std::deque<std::pair<int, int> > PmergeMe::makingDequePair(std::deque<int>& deque, bool& hasStraggler, int& straggler)
+{
+	std::deque<std::pair<int, int> > dequePair;
+
+	hasStraggler = false;
+
+	for (std::deque<int>::iterator it = deque.begin();
+		 it != deque.end();
+		 it += 2)
+	{
+		if (it + 1 == deque.end())
+		{
+			hasStraggler = true;
+			straggler = *it;
+			break;
+		}
+
+		if (*it <= *(it + 1))
+			dequePair.push_back(std::make_pair(*it, *(it + 1)));
+		else
+			dequePair.push_back(std::make_pair(*(it + 1), *it));
+	}
+
+	return (dequePair);
+}
+
+std::deque<int> PmergeMe::insertSmallDeque(std::deque<int>& deque, int small, int big)
+{
+	std::deque<int>::iterator bigPos;
+	std::deque<int>::iterator insertPos;
+
+	bigPos = std::find(deque.begin(), deque.end(), big);
+	insertPos = std::lower_bound(deque.begin(), bigPos, small);
+	deque.insert(insertPos, small);
+
+	return (deque);
+}
+
+std::deque<int> PmergeMe::fordJohnsonDeque(std::deque<int> big)
+{
+	if (big.size() < 2)
+		return (big);
+	
+	bool hasStraggler = false;
+	int straggler = 0;
+	std::deque<std::pair<int, int> > dequePair;
+	std::deque<int> sorted;
+
+	dequePair = makingDequePair(big, hasStraggler, straggler); 
+	big = getBigFromDeque(dequePair);
+	sorted = fordJohnsonDeque(big);
+
+	std::vector<size_t> order = getInsertionOrder(dequePair.size());
+	for (std::vector<size_t>::iterator it = order.begin(); it != order.end(); ++it)
+	{
+		size_t index = *it - 1;
+		sorted = insertSmallDeque(sorted, dequePair[index].first, dequePair[index].second);
+	}
+
+	if (hasStraggler)
+	{
+		std::deque<int>::iterator pos =
+			std::lower_bound(sorted.begin(), sorted.end(), straggler);
+
+		sorted.insert(pos, straggler);
+	}
+
+	return (sorted);
 }
 
 // ==== PUBLIC ==== //

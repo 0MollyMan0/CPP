@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:47:05 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/20 03:22:44 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/20 21:35:00 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,15 @@ private:
 
 	// === Deque === //
 	std::deque<int> _deque;
+	std::deque<std::pair<int, int> > _dequePair;
+
 	bool	addToDeque(std::string& literal);
 	bool	dequePart(int nb_input, char **input);
+	std::deque<std::pair<int, int> >	makingDequePair(std::deque<int>& deque, bool& hasStraggler, int& straggler);
+	std::deque<int>	getBigFromDeque(std::deque<std::pair<int, int> >& dequePair);
+	std::deque<int>	fordJohnsonDeque(std::deque<int> big);
+	std::deque<int>	insertSmallDeque(std::deque<int>& deque, int small, int big);
+
 public:
 	PmergeMe();
 	PmergeMe(const PmergeMe& other);
