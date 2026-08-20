@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:46:34 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/20 03:04:58 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/20 03:33:57 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,56 @@ bool PmergeMe::isPositiveInt(const std::string& supposed_int) const
 	return (true);
 }
 
+std::vector<size_t> PmergeMe::generateJacobsthal(size_t size)
+{
+    std::vector<size_t> jacob;
+
+    jacob.push_back(0);
+    jacob.push_back(1);
+
+    while (jacob.back() < size)
+    {
+        size_t n = jacob.size();
+
+        jacob.push_back(
+            jacob[n - 1] + 2 * jacob[n - 2]
+        );
+    }
+
+    return (jacob);
+}
+
 // === Vector === //
+
+std::vector<size_t> PmergeMe::getInsertionOrder(size_t size)
+{
+    std::vector<size_t> order;
+
+    if (size == 0)
+        return (order);
+
+    order.push_back(1);
+
+    size_t previous = 1;
+    size_t current = 3;
+
+    while (previous < size)
+    {
+        size_t end = current;
+
+        if (end > size)
+            end = size;
+
+        for (size_t i = end; i > previous; --i)
+            order.push_back(i);
+
+        size_t next = current + 2 * previous;
+        previous = current;
+        current = next;
+    }
+
+    return (order);
+}
 
 void	displayVector(std::vector<int> vector)
 {
@@ -93,7 +142,6 @@ bool	PmergeMe::vectorPart(int nb_input, char **input)
 		if (!addToVector(tmp))
 			return (false);
 	}
-	std::cout << "fordJohnson begin" << std::endl;
 	this->_vector = fordJohnsonVector(this->_vector);
 	return (true);
 }
@@ -146,16 +194,15 @@ std::vector<int> PmergeMe::fordJohnsonVector(std::vector<int> big)
 	std::vector<std::pair<int, int> > vectorPair;
 	std::vector<int> sorted;
 
-	displayVector(big);
-	
 	vectorPair = makingVectorPair(big, hasStraggler, straggler); 
 	big = getBigFromVector(vectorPair);
 	sorted = fordJohnsonVector(big);
 
-	for (std::vector<std::pair<int, int> >::iterator it = vectorPair.begin(); it != vectorPair.end(); ++it)
+	std::vector<size_t> order = getInsertionOrder(vectorPair.size());
+	for (std::vector<size_t>::iterator it = order.begin(); it != order.end(); ++it)
 	{
-		displayVector(sorted);
-		sorted = insertSmallVector(sorted, it->first, it->second);
+		size_t index = *it - 1;
+		sorted = insertSmallVector(sorted, vectorPair[index].first, vectorPair[index].second);
 	}
 
 	if (hasStraggler)

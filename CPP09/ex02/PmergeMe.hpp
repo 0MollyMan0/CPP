@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:47:05 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/20 03:04:23 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/20 03:22:44 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ private:
 	bool	isPositiveInt(const std::string& literal) const;
 	int		stringToInt(const std::string& str) const;
 	double	getDiffInUs(timeval before, timeval after);
+	std::vector<size_t>	generateJacobsthal(size_t size);
 
 	// === Vector === //
 	std::vector<int> _vector;
@@ -52,6 +53,7 @@ private:
 	std::vector<int>	getBigFromVector(std::vector<std::pair<int, int> >& vectorPair);
 	std::vector<int>	fordJohnsonVector(std::vector<int> big);
 	std::vector<int>	insertSmallVector(std::vector<int>& vector, int small, int big);
+	std::vector<size_t> getInsertionOrder(size_t size);
 
 	// === Deque === //
 	std::deque<int> _deque;
