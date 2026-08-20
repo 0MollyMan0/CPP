@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:46:34 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/19 21:43:05 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/20 03:04:58 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ bool PmergeMe::isPositiveInt(const std::string& supposed_int) const
 
 // === Vector === //
 
+void	displayVector(std::vector<int> vector)
+{
+	for (std::vector<int> ::iterator it = vector.begin(); it != vector.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+}
+
 std::vector<int> PmergeMe::getBigFromVector(std::vector<std::pair<int, int> >& vectorPair)
 {
 	std::vector<int> res;
@@ -91,41 +98,75 @@ bool	PmergeMe::vectorPart(int nb_input, char **input)
 	return (true);
 }
 
-std::vector<std::pair<int, int> > PmergeMe::makingVectorPair(std::vector<int>& vector, bool straggler)
+std::vector<std::pair<int, int> > PmergeMe::makingVectorPair(std::vector<int>& vector, bool& hasStraggler, int& straggler)
 {
 	std::vector<std::pair<int, int> > vectorPair;
-	for (std::vector<int>::iterator it = vector.begin(); it != vector.end(); it+=2)
+
+	hasStraggler = false;
+
+	for (std::vector<int>::iterator it = vector.begin();
+		 it != vector.end();
+		 it += 2)
 	{
-		if (straggler && it + 1 == vector.end())
+		if (it + 1 == vector.end())
 		{
-			this->_hasVectorStraggler = true;
-			this->_vectorStraggler = *it;
+			hasStraggler = true;
+			straggler = *it;
 			break;
 		}
+
+		if (*it <= *(it + 1))
+			vectorPair.push_back(std::make_pair(*it, *(it + 1)));
 		else
-		{
-			if (*it <= *(it + 1))
-				vectorPair.push_back(std::make_pair(*it, *(it + 1)));
-			else
-				vectorPair.push_back(std::make_pair(*(it + 1), *it));	
-		}
+			vectorPair.push_back(std::make_pair(*(it + 1), *it));
 	}
+
 	return (vectorPair);
+}
+
+std::vector<int> PmergeMe::insertSmallVector(std::vector<int>& vector, int small, int big)
+{
+	std::vector<int>::iterator bigPos;
+	std::vector<int>::iterator insertPos;
+
+	bigPos = std::find(vector.begin(), vector.end(), big);
+	insertPos = std::lower_bound(vector.begin(), bigPos, small);
+	vector.insert(insertPos, small);
+
+	return (vector);
 }
 
 std::vector<int> PmergeMe::fordJohnsonVector(std::vector<int> big)
 {
 	if (big.size() < 2)
 		return (big);
+	
+	bool hasStraggler = false;
+	int straggler = 0;
+	std::vector<std::pair<int, int> > vectorPair;
+	std::vector<int> sorted;
 
-	std::vector<std::pair<int, int> > vectorPair = makingVectorPair(big, big.size() % 2 != 0); 
+	displayVector(big);
+	
+	vectorPair = makingVectorPair(big, hasStraggler, straggler); 
 	big = getBigFromVector(vectorPair);
-	for (std::vector<int> ::iterator it = big.begin(); 
-			it != big.end();
-			it++)
-		std::cout << *it << " ";
-	std::cout << std::endl;
-	return fordJohnsonVector(big);
+	sorted = fordJohnsonVector(big);
+
+	for (std::vector<std::pair<int, int> >::iterator it = vectorPair.begin(); it != vectorPair.end(); ++it)
+	{
+		displayVector(sorted);
+		sorted = insertSmallVector(sorted, it->first, it->second);
+	}
+
+	if (hasStraggler)
+	{
+		std::vector<int>::iterator pos =
+			std::lower_bound(sorted.begin(), sorted.end(), straggler);
+
+		sorted.insert(pos, straggler);
+	}
+
+	return (sorted);
 }
 
 // === Deque === //
@@ -157,7 +198,6 @@ bool	PmergeMe::dequePart(int nb_input, char **input)
 bool	PmergeMe::sort(int nb_input, char **input)
 {
 	// struct timeval vBefore, vAfter, dBefore, dAfter;
-	this->_hasVectorStraggler = false;
 
 	// gettimeofday(&vBefore, NULL);
 	if (!vectorPart(nb_input, input))
@@ -179,8 +219,6 @@ bool	PmergeMe::sort(int nb_input, char **input)
 	// 		it != this->_vectorPair.end();
 	// 		it++)
 	// 	std::cout << "(" << it->first << ", " << it->second << ") ";
-	// if (this->_hasVectorStraggler)
-	// 	std::cout << this->_vectorStraggler;
 	// std::cout << std::endl;
 
 	std::cout << "After: ";

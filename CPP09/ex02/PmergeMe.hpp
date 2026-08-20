@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:47:05 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/19 21:38:34 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/20 03:04:23 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@
 # include <limits>
 # include <cctype>
 # include <sys/time.h>
+# include <algorithm>
 
 class PmergeMe
 {
 private:
 	// === Utils === //
-	void	swapPair(std::pair<int, int> _pair);
 	bool	isPositiveInt(const std::string& literal) const;
 	int		stringToInt(const std::string& str) const;
 	double	getDiffInUs(timeval before, timeval after);
@@ -45,14 +45,13 @@ private:
 	// === Vector === //
 	std::vector<int> _vector;
 	std::vector<std::pair<int, int> > _vectorPair;
-	int		_vectorStraggler;
-	bool _hasVectorStraggler;
 
 	bool	addToVector(std::string& literal);
 	bool	vectorPart(int nb_input, char **input);
-	std::vector<std::pair<int, int> >	makingVectorPair(std::vector<int>& vector, bool straggler);
+	std::vector<std::pair<int, int> >	makingVectorPair(std::vector<int>& vector, bool& hasStraggler, int& straggler);
 	std::vector<int>	getBigFromVector(std::vector<std::pair<int, int> >& vectorPair);
 	std::vector<int>	fordJohnsonVector(std::vector<int> big);
+	std::vector<int>	insertSmallVector(std::vector<int>& vector, int small, int big);
 
 	// === Deque === //
 	std::deque<int> _deque;
