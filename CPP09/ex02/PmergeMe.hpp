@@ -1,0 +1,78 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/11 21:47:05 by anfouger          #+#    #+#             */
+/*   Updated: 2026/08/20 21:35:00 by anfouger         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PMERGEME_HPP
+# define PMERGEME_HPP
+
+# define RESET "\033[0m"
+# define BLACK "\033[1;30m"
+# define RED "\033[1;31m"
+# define GREEN "\033[1;32m"
+# define YELLOW "\033[1;33m"
+# define BLUE "\033[1;34m"
+# define MAGENTA "\033[1;35m"
+# define CYAN "\033[1;36m"
+# define WHITE "\033[1;37m"
+
+# include <stdlib.h>
+# include <vector>
+# include <deque>
+# include <iostream>
+# include <string>
+# include <sstream>
+# include <limits>
+# include <cctype>
+# include <sys/time.h>
+# include <algorithm>
+
+class PmergeMe
+{
+private:
+	// === Utils === //
+	bool	isPositiveInt(const std::string& literal) const;
+	int		stringToInt(const std::string& str) const;
+	double	getDiffInUs(timeval before, timeval after);
+	std::vector<size_t>	generateJacobsthal(size_t size);
+
+	// === Vector === //
+	std::vector<int> _vector;
+	std::vector<std::pair<int, int> > _vectorPair;
+
+	bool	addToVector(std::string& literal);
+	bool	vectorPart(int nb_input, char **input);
+	std::vector<std::pair<int, int> >	makingVectorPair(std::vector<int>& vector, bool& hasStraggler, int& straggler);
+	std::vector<int>	getBigFromVector(std::vector<std::pair<int, int> >& vectorPair);
+	std::vector<int>	fordJohnsonVector(std::vector<int> big);
+	std::vector<int>	insertSmallVector(std::vector<int>& vector, int small, int big);
+	std::vector<size_t> getInsertionOrder(size_t size);
+
+	// === Deque === //
+	std::deque<int> _deque;
+	std::deque<std::pair<int, int> > _dequePair;
+
+	bool	addToDeque(std::string& literal);
+	bool	dequePart(int nb_input, char **input);
+	std::deque<std::pair<int, int> >	makingDequePair(std::deque<int>& deque, bool& hasStraggler, int& straggler);
+	std::deque<int>	getBigFromDeque(std::deque<std::pair<int, int> >& dequePair);
+	std::deque<int>	fordJohnsonDeque(std::deque<int> big);
+	std::deque<int>	insertSmallDeque(std::deque<int>& deque, int small, int big);
+
+public:
+	PmergeMe();
+	PmergeMe(const PmergeMe& other);
+	PmergeMe& operator=(const PmergeMe& other);
+	~PmergeMe();
+	bool	sort(int nb_input, char **argv);
+};
+
+
+#endif
