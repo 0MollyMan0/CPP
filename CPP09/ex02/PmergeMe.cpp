@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:46:34 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/20 21:52:56 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/20 22:20:07 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,46 +334,66 @@ std::deque<int> PmergeMe::fordJohnsonDeque(std::deque<int> big)
 // ==== PUBLIC ==== //
 bool	PmergeMe::sort(int nb_input, char **input)
 {
-	// struct timeval vBefore, vAfter, dBefore, dAfter;
+	struct timeval vBefore, vAfter, dBefore, dAfter;
+	bool	too_much_para = false;
 
-	// gettimeofday(&vBefore, NULL);
+	// --- Sort with vector --- //
+	gettimeofday(&vBefore, NULL);
 	if (!vectorPart(nb_input, input))
 		return (false);
-	// gettimeofday(&vAfter, NULL);
+	gettimeofday(&vAfter, NULL);
 	
-	// gettimeofday(&dBefore, NULL);
+	// --- Sort with Deque --- //
+	gettimeofday(&dBefore, NULL);
 	if (!dequePart(nb_input, input))
 		return (false);
-	// gettimeofday(&dAfter, NULL);
+	gettimeofday(&dAfter, NULL);
+
+
+	// --- Display Before --- //
+	int nb_input_to_display = nb_input;
+	if (nb_input > 20)
+	{
+		too_much_para = true;
+		nb_input_to_display = 20 + 1;
+	}
 
 	std::cout << "Before: ";
-	for (int i = 1; i < nb_input; i++)
+	for (int i = 1; i < nb_input_to_display; i++)
 		std::cout << input[i] << " ";
+	if (too_much_para)
+		std::cout << "[...]";
 	std::cout << std::endl;
-	
-	// std::cout << "After Making Pair: ";
-	// for (std::vector<std::pair<int, int> > ::iterator it = this->_vectorPair.begin(); 
-	// 		it != this->_vectorPair.end();
-	// 		it++)
-	// 	std::cout << "(" << it->first << ", " << it->second << ") ";
-	// std::cout << std::endl;
 
-	std::cout << "After: ";
-	for (std::vector<int> ::iterator it = this->_vector.begin(); 
-			it != this->_vector.end();
-			it++)
+	// --- Display After --- //
+	std::vector<int> ::iterator end;
+	if (too_much_para)
+	{
+		std::vector<int> ::iterator it = this->_vector.begin();
+		for (size_t i = 0; i < 20; ++i)
+			++it;
+		end = it;
+	}
+	else
+		end = this->_vector.end();
+
+	std::cout << "After:  ";
+	for (std::vector<int> ::iterator it = this->_vector.begin(); it != end; it++)
 		std::cout << *it << " ";
-	// if (this->_hasVectorStraggler)
-	// 	std::cout << this->_vectorStraggler;
+	if (too_much_para)
+		std::cout << "[...]";
 	std::cout << std::endl;
 
-	// double us = getDiffInUs(vBefore, vAfter);
-	// std::cout << "Time to process a range of " << nb_input - 1 
-	// 	<< " elements with std::vector: " << us << " us" << std::endl;
 
-	// us = getDiffInUs(dBefore, dAfter);
-	// std::cout << "Time to process a range of " << nb_input - 1 
-	// 	<< " elements with std::deque: " << us << " us" << std::endl;
+	// --- Display Time --- //
+	double us = getDiffInUs(vBefore, vAfter);
+	std::cout << "Time to process a range of " << nb_input - 1 
+		<< " elements with std::vector : " << us << " us" << std::endl;
+
+	us = getDiffInUs(dBefore, dAfter);
+	std::cout << "Time to process a range of " << nb_input - 1 
+		<< " elements with std::deque :  " << us << " us" << std::endl;
+
 	return (true);
 }
 
