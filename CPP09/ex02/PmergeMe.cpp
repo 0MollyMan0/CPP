@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:46:34 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/20 22:20:07 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/20 22:58:38 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,6 @@ bool PmergeMe::isPositiveInt(const std::string& supposed_int) const
 		return (false);
 	return (true);
 }
-
-// std::vector<size_t> PmergeMe::generateJacobsthal(size_t size)
-// {
-//     std::vector<size_t> jacob;
-
-//     jacob.push_back(0);
-//     jacob.push_back(1);
-
-//     while (jacob.back() < size)
-//     {
-//         size_t n = jacob.size();
-
-//         jacob.push_back(
-//             jacob[n - 1] + 2 * jacob[n - 2]
-//         );
-//     }
-
-//     return (jacob);
-// }
 
 // === Vector === //
 

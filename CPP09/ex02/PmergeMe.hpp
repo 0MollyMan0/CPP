@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 21:47:05 by anfouger          #+#    #+#             */
-/*   Updated: 2026/08/20 21:35:00 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/08/20 22:58:41 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ private:
 	bool	isPositiveInt(const std::string& literal) const;
 	int		stringToInt(const std::string& str) const;
 	double	getDiffInUs(timeval before, timeval after);
-	std::vector<size_t>	generateJacobsthal(size_t size);
 
 	// === Vector === //
 	std::vector<int> _vector;
